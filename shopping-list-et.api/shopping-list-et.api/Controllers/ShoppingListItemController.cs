@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using shopping_list_et.application.Events;
+using shopping_list_et.application.Events.ShoppingListItemChanged;
+using shopping_list_et.application.Events.ShoppingListItemDelete;
 using shopping_list_et.application.ShoppingListCreate;
 using shopping_list_et.application.ShoppingListItemCheck;
 using shopping_list_et.application.ShoppingListItemCreate;

@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace shopping_list_et.application.Events
+namespace shopping_list_et.application.Events.ShoppingListItemChanged
 {
-    public class ShoppingListItemDeleteEvent : INotification
+    public class ShoppingListItemChangedEvent : INotification
     {
         public int? ShoppingListId { get; set; }
         public int? ItemId { get; set; }
+
     }
 }
