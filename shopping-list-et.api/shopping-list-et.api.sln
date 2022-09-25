@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shopping-list-et.api", "shopping-list-et.api\shopping-list-et.api.csproj", "{7E4E5A41-4DC7-46CF-A1CC-458E7EE3877C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping-list-et.api", "shopping-list-et.api\shopping-list-et.api.csproj", "{7E4E5A41-4DC7-46CF-A1CC-458E7EE3877C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shopping-list-et.infrastructure", "shopping-list-et.infrastructure\shopping-list-et.infrastructure.csproj", "{6F9C15DC-E563-4AAB-96A7-98A24B8077DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping-list-et.infrastructure", "shopping-list-et.infrastructure\shopping-list-et.infrastructure.csproj", "{6F9C15DC-E563-4AAB-96A7-98A24B8077DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shopping-list-et.domain", "shopping-list-et.domain\shopping-list-et.domain.csproj", "{E3FA3242-4AA1-42A6-8CDC-4639F6AA0771}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping-list-et.domain", "shopping-list-et.domain\shopping-list-et.domain.csproj", "{E3FA3242-4AA1-42A6-8CDC-4639F6AA0771}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shopping-list-et.functions", "..\shopping-list-et.functions\shopping-list-et.functions.csproj", "{F56A15FF-6C73-4B31-A7EE-C1ADF1D9141E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping-list-et.functions", "..\shopping-list-et.functions\shopping-list-et.functions.csproj", "{F56A15FF-6C73-4B31-A7EE-C1ADF1D9141E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure", "azure", "{FCB2F6A3-1BE2-4B30-B2BE-0C0AEDDE3212}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping-list-et.application", "shopping-list-et.application\shopping-list-et.application.csproj", "{06285249-7234-4F4B-9322-D785056CAC4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +35,10 @@ Global
 		{F56A15FF-6C73-4B31-A7EE-C1ADF1D9141E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F56A15FF-6C73-4B31-A7EE-C1ADF1D9141E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F56A15FF-6C73-4B31-A7EE-C1ADF1D9141E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06285249-7234-4F4B-9322-D785056CAC4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06285249-7234-4F4B-9322-D785056CAC4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06285249-7234-4F4B-9322-D785056CAC4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06285249-7234-4F4B-9322-D785056CAC4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
