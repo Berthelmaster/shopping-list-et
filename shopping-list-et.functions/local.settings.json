@@ -1,0 +1,8 @@
+{
+    "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "ConnectionStrings:Database": "Server=(localdb)\\mssqllocaldb;Database=shoppinglist;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}

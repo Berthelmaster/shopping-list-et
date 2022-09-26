@@ -2,14 +2,10 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
-    <RootNamespace>shopping_list_et.functions</RootNamespace>
+    <RootNamespace>shopping_list_et_functions</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\shopping-list-et.api\shopping-list-et.application\shopping-list-et.application.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "shopping_list_et.functions": {
+    "shopping_list_et_functions": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7002",
+      "commandLineArgs": "--port 7228",
       "launchBrowser": false
     }
   }
