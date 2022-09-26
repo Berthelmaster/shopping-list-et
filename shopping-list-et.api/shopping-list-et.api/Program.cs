@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using shopping_list_et.infrastructure.Context;
 using MediatR;
 using shopping_list_et.application;
+using shopping_list_et.infrastructure.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Database"),
     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
+builder.Services.AddSignalR();
+
+builder.Services.AddScoped<ShoppingListHub>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -33,10 +37,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseWebSockets();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<ShoppingListHub>("/signalr/hub");
 
 app.Run();

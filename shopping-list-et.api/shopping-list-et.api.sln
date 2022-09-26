@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping-list-et.functions"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping-list-et.application", "shopping-list-et.application\shopping-list-et.application.csproj", "{06285249-7234-4F4B-9322-D785056CAC4C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "development", "development", "{DF3469F7-9893-45A2-9771-E5973A093B46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shopping-list-et.consoleapp", "..\development\shopping-list-et.consoleapp\shopping-list-et.consoleapp.csproj", "{235A3839-E563-4269-B26B-75DF9A93CEA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,9 +43,16 @@ Global
 		{06285249-7234-4F4B-9322-D785056CAC4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06285249-7234-4F4B-9322-D785056CAC4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06285249-7234-4F4B-9322-D785056CAC4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{235A3839-E563-4269-B26B-75DF9A93CEA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235A3839-E563-4269-B26B-75DF9A93CEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235A3839-E563-4269-B26B-75DF9A93CEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{235A3839-E563-4269-B26B-75DF9A93CEA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{235A3839-E563-4269-B26B-75DF9A93CEA7} = {DF3469F7-9893-45A2-9771-E5973A093B46}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A195200C-5888-47FF-BDCB-4ABE806E76A2}

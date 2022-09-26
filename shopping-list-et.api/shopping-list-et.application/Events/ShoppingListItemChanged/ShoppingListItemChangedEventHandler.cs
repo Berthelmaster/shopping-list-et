@@ -1,4 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
+using shopping_list_et.domain.Entities;
+using shopping_list_et.infrastructure.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +13,19 @@ namespace shopping_list_et.application.Events.ShoppingListItemChanged
 {
     public class ShoppingListItemChangedEventHandler : INotificationHandler<ShoppingListItemChangedEvent>
     {
-        public Task Handle(ShoppingListItemChangedEvent notification, CancellationToken cancellationToken)
-        {
-            Console.WriteLine($"ShoppingList with id {notification.ShoppingListId} changed item with Id {notification.ItemId}");
+        private readonly IHubContext<ShoppingListHub> hubcontext;
+        private readonly ILogger<ShoppingListItemChangedEventHandler> logger;
 
-            return Task.CompletedTask;
+        public ShoppingListItemChangedEventHandler(IHubContext<ShoppingListHub> hubcontext, ILogger<ShoppingListItemChangedEventHandler> logger)
+        {
+            this.hubcontext = hubcontext;
+            this.logger = logger;
+        }
+        public async Task Handle(ShoppingListItemChangedEvent notification, CancellationToken cancellationToken)
+        {
+            logger.LogInformation($"OnItemChangedEvent: Adjusting shoppinglist with Id {notification.ShoppingListId}");
+
+            await hubcontext.Clients.All.SendAsync("OnItemChangedEvent", notification.ShoppingListId, cancellationToken);
         }
     }
 }
