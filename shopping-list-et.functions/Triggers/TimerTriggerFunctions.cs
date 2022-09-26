@@ -27,10 +27,32 @@ namespace shopping_list_et.functions.Triggers
 
             var shoppingLists = await context.ShoppingLists.ToListAsync(cancellationToken);
 
-            foreach (var item in shoppingLists)
+            foreach (var shoppinglist in shoppingLists)
             {
-                log.LogInformation(item.Id.ToString());
+                if (shoppinglist.UpdatedAt <= DateTime.UtcNow - TimeSpan.FromMinutes(15))
+                    shoppinglist.Active = false;
             }
+
+            await context.SaveChangesAsync(cancellationToken);
+
+            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+        }
+
+        [FunctionName("DeleteExpiredShoppingLists")]
+        public async Task DeleteExpiredShoppingLists([TimerTrigger("0 */1 * * * *")] TimerInfo timer, ILogger log, CancellationToken cancellationToken)
+        {
+            if (timer.IsPastDue)
+                return;
+
+            var shoppingLists = await context.ShoppingLists.ToListAsync(cancellationToken);
+
+            foreach (var shoppinglist in shoppingLists)
+            {
+                if (shoppinglist.UpdatedAt <= DateTime.UtcNow - TimeSpan.FromDays(30))
+                    context.ShoppingLists.Remove(shoppinglist);
+            }
+
+            await context.SaveChangesAsync(cancellationToken);
 
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
         }
