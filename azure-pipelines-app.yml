@@ -21,4 +21,4 @@ steps:
 - task: FlutterBuild@0
   inputs:
     target: 'apk'
-    projectDirectory: '.'
+    projectDirectory: 'shopping-list-et.app/'
