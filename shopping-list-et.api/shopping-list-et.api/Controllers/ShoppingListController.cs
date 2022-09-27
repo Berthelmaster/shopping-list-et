@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using shopping_list_et.application.Events.ShoppingListUpdated;
 using shopping_list_et.application.ShoppingListCreate;
 using shopping_list_et.application.ShoppingListDelete;
+using shopping_list_et.application.ShoppingListGet;
 using shopping_list_et.application.ShoppingListGetAll;
 
 namespace shopping_list_et.api.Controllers
@@ -16,6 +17,32 @@ namespace shopping_list_et.api.Controllers
         public ShoppingListController(IMediator mediator)
         {
             this.mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(int id, CancellationToken cancellationToken)
+        {
+            var command = new ShoppingListGetCommand()
+            {
+                ShoppingListId = id,
+            };
+
+            var response = await mediator.Send(command, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        {
+            var command = new ShoppingListGetAllCommand()
+            {
+
+            };
+
+            var response = await mediator.Send(command, cancellationToken);
+
+            return Ok(response);
         }
 
         [HttpPost]
@@ -61,19 +88,6 @@ namespace shopping_list_et.api.Controllers
             }
 
             return BadRequest();
-        }
-
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
-        {
-            var command = new ShoppingListGetAllCommand()
-            {
-
-            };
-
-            var response = await mediator.Send(command, cancellationToken);
-
-            return Ok(response);
         }
     }
 }
