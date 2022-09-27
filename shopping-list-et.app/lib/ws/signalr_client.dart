@@ -12,6 +12,24 @@ class SignalrClient{
         .build();
     print("HIT");
 
+    setupConnectionChangeEvents();
+
+    startHubConnection();
+  }
+
+  void checkConnection() {
+    if (!connected) {
+      hubConnection.start();
+      connected = true;
+    }
+  }
+
+  void startHubConnection(){
+    hubConnection.start();
+    connected = true;
+  }
+
+  void setupConnectionChangeEvents(){
     hubConnection.onreconnected(({connectionId}) {
       print("Reconnected");
       connected = true;
@@ -25,16 +43,6 @@ class SignalrClient{
     hubConnection.onreconnecting(({error}) {
       print("reconnecting...");
     });
-
-    hubConnection.start();
-    connected = true;
-  }
-
-  void checkConnection(){
-    if(!connected){
-      hubConnection.start();
-      connected = true;
-    }
   }
 
 
