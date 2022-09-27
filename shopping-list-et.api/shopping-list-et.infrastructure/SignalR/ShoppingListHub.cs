@@ -14,17 +14,17 @@ namespace shopping_list_et.infrastructure.SignalR
     public class ShoppingListHub : Hub
     {
         private readonly ILogger<ShoppingListHub> logger;
-        private readonly ApplicationDbContext context;
 
-        public ShoppingListHub(ILogger<ShoppingListHub> logger, ApplicationDbContext context)
+        public ShoppingListHub(ILogger<ShoppingListHub> logger)
         {
             this.logger = logger;
-            this.context = context;
         }
 
         public override async Task OnConnectedAsync()
         {
             await base.OnConnectedAsync();
+
+            logger.LogInformation("Device Connected");
         }
     }
 }

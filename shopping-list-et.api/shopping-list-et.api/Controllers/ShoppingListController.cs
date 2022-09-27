@@ -48,16 +48,19 @@ namespace shopping_list_et.api.Controllers
 
             var response = await mediator.Send(command, cancellationToken);
 
-            var @event = new ShoppingListUpdatedEvent()
+            if (response)
             {
+                var @event = new ShoppingListUpdatedEvent()
+                {
 
-            };
+                };
 
-            await mediator.Publish(@event, cancellationToken);
+                await mediator.Publish(@event, cancellationToken);
 
-            return response
-                ? Ok() 
-                : BadRequest();
+                return Ok();
+            }
+
+            return BadRequest();
         }
 
         [HttpGet("all")]
