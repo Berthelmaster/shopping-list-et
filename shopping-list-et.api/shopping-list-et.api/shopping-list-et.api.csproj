@@ -20,4 +20,8 @@
     <ProjectReference Include="..\shopping-list-et.application\shopping-list-et.application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Queues\" />
+  </ItemGroup>
+
 </Project>

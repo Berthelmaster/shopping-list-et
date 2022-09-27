@@ -35,7 +35,7 @@ namespace shopping_list_et.functions.Triggers
 
             await context.SaveChangesAsync(cancellationToken);
 
-            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+            log.LogInformation($"C# Timer trigger function executed at: {DateTime.UtcNow}");
         }
 
         [FunctionName("DeleteExpiredShoppingLists")]
@@ -54,7 +54,7 @@ namespace shopping_list_et.functions.Triggers
 
             await context.SaveChangesAsync(cancellationToken);
 
-            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+            log.LogInformation($"C# Timer trigger function executed at: {DateTime.UtcNow}");
         }
     }
 }
