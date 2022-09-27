@@ -22,22 +22,6 @@ namespace shopping_list_et.infrastructure.SignalR
             this.context = context;
         }
 
-        /*
-        public async Task OnItemChangedEvent(int shoppingListId, CancellationToken cancellationToken)
-        {
-            logger.LogInformation($"OnItemChangedEvent: Adjusting shoppinglist with Id {shoppingListId}");
-
-            await Clients.All.SendAsync("OnItemChangedEvent", shoppingListId, cancellationToken);
-        }
-
-        public async Task OnShoppingListChangedEvent(CancellationToken cancellationToken)
-        {
-            logger.LogInformation($"OnShoppingListChangedEvent: Dispatch event to fetch updated shopping list");
-
-            await Clients.All.SendAsync("OnShoppingListChangedEvent", cancellationToken);
-        }
-        */
-
         public override async Task OnConnectedAsync()
         {
             await base.OnConnectedAsync();
