@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using shopping_list_et.application.Events.ShoppingListUpdated;
 using shopping_list_et.application.ShoppingListCreate;
 using shopping_list_et.application.ShoppingListDelete;
 using shopping_list_et.application.ShoppingListGetAll;
@@ -27,6 +28,13 @@ namespace shopping_list_et.api.Controllers
 
             var response = await mediator.Send(command, cancellationToken);
 
+            var @event = new ShoppingListUpdatedEvent()
+            {
+
+            };
+
+            await mediator.Publish(@event, cancellationToken);
+
             return Ok(response);
         }
 
@@ -39,6 +47,13 @@ namespace shopping_list_et.api.Controllers
             };
 
             var response = await mediator.Send(command, cancellationToken);
+
+            var @event = new ShoppingListUpdatedEvent()
+            {
+
+            };
+
+            await mediator.Publish(@event, cancellationToken);
 
             return response
                 ? Ok() 

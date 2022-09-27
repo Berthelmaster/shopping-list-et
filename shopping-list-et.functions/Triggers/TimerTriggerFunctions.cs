@@ -39,7 +39,7 @@ namespace shopping_list_et.functions.Triggers
         }
 
         [FunctionName("DeleteExpiredShoppingLists")]
-        public async Task DeleteExpiredShoppingLists([TimerTrigger("0 */1 * * * *")] TimerInfo timer, ILogger log, CancellationToken cancellationToken)
+        public async Task DeleteExpiredShoppingLists([TimerTrigger("0 */60 * * * *")] TimerInfo timer, ILogger log, CancellationToken cancellationToken)
         {
             if (timer.IsPastDue)
                 return;

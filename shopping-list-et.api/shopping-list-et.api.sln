@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping-list-et.applicatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "development", "development", "{DF3469F7-9893-45A2-9771-E5973A093B46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shopping-list-et.consoleapp", "..\development\shopping-list-et.consoleapp\shopping-list-et.consoleapp.csproj", "{235A3839-E563-4269-B26B-75DF9A93CEA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shopping-list-et.consoleapp", "..\development\shopping-list-et.consoleapp\shopping-list-et.consoleapp.csproj", "{235A3839-E563-4269-B26B-75DF9A93CEA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using shopping_list_et.application.Events;
 using shopping_list_et.application.Events.ShoppingListItemChanged;
-using shopping_list_et.application.Events.ShoppingListItemDelete;
 using shopping_list_et.application.ShoppingListCreate;
 using shopping_list_et.application.ShoppingListItemCheck;
 using shopping_list_et.application.ShoppingListItemCreate;
@@ -31,6 +30,14 @@ namespace shopping_list_et.api.Controllers
             };
 
             var response = await mediator.Send(command, cancellationToken);
+
+            var @event = new ShoppingListItemChangedEvent()
+            {
+                ItemId = response.Id,
+                ShoppingListId = response.ShoppingListId
+            };
+
+            await mediator.Publish(@event, cancellationToken);
 
             return Ok(response);
         }
@@ -67,7 +74,7 @@ namespace shopping_list_et.api.Controllers
 
             var response = await mediator.Send(command, cancellationToken);
 
-            var @event = new ShoppingListItemDeleteEvent()
+            var @event = new ShoppingListItemChangedEvent()
             {
                 ItemId = response.Id,
                 ShoppingListId = response.ShoppingListId
