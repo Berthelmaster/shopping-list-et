@@ -26,5 +26,12 @@ namespace shopping_list_et.infrastructure.SignalR
 
             logger.LogInformation("Device Connected");
         }
+
+        public override Task OnDisconnectedAsync(Exception? exception)
+        {
+            return base.OnDisconnectedAsync(exception);
+
+            logger.LogInformation("Device Disconnected");
+        }
     }
 }
