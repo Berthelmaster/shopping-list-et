@@ -2,10 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
 import '../environment.dart';
+import 'package:event/event.dart';
 
 class SignalrClient{
   late HubConnection hubConnection;
   bool connected = false;
+  Event onShoppingListUpdated = Event();
+  Event<ShoppingListItemEventArgs> onShoppingListItemUpdated = Event<ShoppingListItemEventArgs>();
 
   SignalrClient(){
 
@@ -23,6 +26,8 @@ class SignalrClient{
 
     setupConnectionChangeEvents();
 
+    setupEvents();
+
     startHubConnection();
   }
 
@@ -36,6 +41,17 @@ class SignalrClient{
   void startHubConnection() {
     hubConnection.start();
     connected = true;
+  }
+  
+  void setupEvents(){
+    hubConnection.on("OnShoppingListChangedEvent", (argument) {
+      onShoppingListUpdated.broadcast();
+    });
+
+    hubConnection.on("OnItemChangedEvent", (argument) {
+      var shoppingListId = int.parse(argument.toString());
+      onShoppingListItemUpdated.broadcast(ShoppingListItemEventArgs(shoppingListId));
+    });
   }
 
   void setupConnectionChangeEvents(){
@@ -61,4 +77,10 @@ class SignalrClient{
   }
 
 
+}
+
+class ShoppingListItemEventArgs extends EventArgs{
+  int shoppingListId;
+
+  ShoppingListItemEventArgs(this.shoppingListId);
 }
