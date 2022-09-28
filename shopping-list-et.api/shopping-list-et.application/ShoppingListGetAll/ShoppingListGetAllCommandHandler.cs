@@ -21,9 +21,12 @@ namespace shopping_list_et.application.ShoppingListGetAll
 
         public async Task<List<ShoppingList>> Handle(ShoppingListGetAllCommand request, CancellationToken cancellationToken)
         {
-            return await context.ShoppingLists
+            var shoppingLists = await context.ShoppingLists
+                .Include(x => x.Items)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
+
+            return shoppingLists;
         }
     }
 }

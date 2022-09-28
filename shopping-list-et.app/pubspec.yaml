@@ -41,6 +41,7 @@ dependencies:
   get_it: ^7.2.0
   http: ^0.13.5
   event: ^2.1.2
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
