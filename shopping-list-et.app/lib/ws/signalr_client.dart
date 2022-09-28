@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
 import '../environment.dart';
@@ -7,10 +8,18 @@ class SignalrClient{
   bool connected = false;
 
   SignalrClient(){
+
+    if (kDebugMode) {
+      print("using http base address: $httpBaseAddress");
+    }
+
     hubConnection = HubConnectionBuilder()
         .withUrl("$httpBaseAddress/signalr/hub")
         .build();
-    print("HIT");
+
+    if (kDebugMode) {
+      print("HIT");
+    }
 
     setupConnectionChangeEvents();
 
@@ -24,24 +33,30 @@ class SignalrClient{
     }
   }
 
-  void startHubConnection(){
+  void startHubConnection() {
     hubConnection.start();
     connected = true;
   }
 
   void setupConnectionChangeEvents(){
     hubConnection.onreconnected(({connectionId}) {
-      print("Reconnected");
+      if (kDebugMode) {
+        print("Reconnected");
+      }
       connected = true;
     });
 
     hubConnection.onclose(({error}) {
-      print("closed");
+      if (kDebugMode) {
+        print("closed");
+      }
       connected = false;
     });
 
     hubConnection.onreconnecting(({error}) {
-      print("reconnecting...");
+      if (kDebugMode) {
+        print("reconnecting...");
+      }
     });
   }
 

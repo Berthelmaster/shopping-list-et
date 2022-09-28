@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shopping_list_et_app/locator.dart';
+import 'package:shopping_list_et_app/repositories/shopping_list_repository.dart';
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
+
+import 'models/shopping_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,9 +60,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  List<ShoppingList> shoppingLists = <ShoppingList>[];
 
-  void _incrementCounter() {
-    locator.get<SignalrClient>();
+  void _incrementCounter() async{
+    var repo = locator.get<ShoppingListRepository>();
+
+    shoppingLists = await repo.getAll();
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -108,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              shoppingLists[1].createdAt.toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
           ],

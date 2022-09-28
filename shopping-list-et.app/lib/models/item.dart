@@ -9,6 +9,6 @@ class Item{
   Item.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         text = json["text"],
-        createdAt = json["createdAt"],
+        createdAt = DateTime.parse(json["createdAt"]),
         checked = json["checked"];
 }
