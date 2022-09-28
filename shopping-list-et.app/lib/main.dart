@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shopping_list_et_app/locator.dart';
 import 'package:shopping_list_et_app/repositories/shopping_list_repository.dart';
+import 'package:shopping_list_et_app/views/shopping_list_view.dart';
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
 
 import 'models/shopping_list.dart';
@@ -30,16 +31,19 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightBlue,
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const MyHomePage(title: "Hello!")
+        '/': (context) => ShoppingListView()
       },
     );
   }
 }
 
+
+
+/*
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -58,6 +62,9 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+ */
+
+/*
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   List<ShoppingList> shoppingLists = <ShoppingList>[];
@@ -114,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              shoppingLists[1].createdAt.toString(),
+              'Hello!',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
@@ -128,3 +135,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+ */
