@@ -8,7 +8,7 @@ import '../repositories/shopping_list_repository.dart';
 class ShoppingListItemViewModel extends ChangeNotifier{
   var shoppingListItemRepository = locator.get<ShoppingListItemRepository>();
   var shoppingListRepository = locator.get<ShoppingListRepository>();
-  ShoppingList? shoppingList = null;
+  ShoppingList? shoppingList;
   bool modelReady() => shoppingList != null;
 
   Future<void> initializeOrCreateShoppingList(int? shoppingListId) async {

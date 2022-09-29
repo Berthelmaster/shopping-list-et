@@ -29,9 +29,9 @@ namespace shopping_list_et.infrastructure.SignalR
 
         public override Task OnDisconnectedAsync(Exception? exception)
         {
-            return base.OnDisconnectedAsync(exception);
-
             logger.LogInformation("Device Disconnected");
+
+            return base.OnDisconnectedAsync(exception);
         }
     }
 }

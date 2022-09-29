@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => ShoppingListView(),
+        '/': (context) => const ShoppingListView(),
         '/shoppingListItem': (context) => const ShoppingListItemView(),
       },
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:shopping_list_et_app/view_models/shopping_list_item_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -11,7 +11,9 @@ class ShoppingListItemView extends StatelessWidget{
 
     final shoppingListId = ModalRoute.of(context)!.settings.arguments != null
         ? (ModalRoute.of(context)!.settings.arguments as ShoppingListItemViewArguments).shoppingListId
-        : ShoppingListItemViewArguments(null).shoppingListId;
+        : ShoppingListItemViewArguments(shoppingListId: null).shoppingListId;
+
+    print(shoppingListId.toString());
 
     // TODO: implement build
     return ViewModelBuilder<ShoppingListItemViewModel>.reactive(
@@ -20,8 +22,13 @@ class ShoppingListItemView extends StatelessWidget{
         builder: (context, viewModel, child) =>
         Scaffold(
           appBar: AppBar(
-            title: Text(
-              'Heloo!'
+            title: Center(
+
+              child: Text(
+                viewModel.modelReady() == true ?
+                "| ${viewModel.shoppingList!.name} |"
+                    : "Loading..."
+              ),
             ),
               bottom: viewModel.modelReady() == false
                   ? PreferredSize(
@@ -35,9 +42,66 @@ class ShoppingListItemView extends StatelessWidget{
           ),
           body: viewModel.modelReady() == true
               ? Center(
-            child: Text(
-                "Hello ${viewModel.shoppingList!.name}"
-            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${viewModel.shoppingList!.items!.where((element) => !element.checked).length} varer mangler",
+                        style: TextStyle(
+                            fontSize: 18
+                        ),
+                      ),
+                      Text(
+                        "${viewModel.shoppingList!.items!.where((element) => element.checked).length} varer i kurven",
+                        style: TextStyle(
+                            fontSize: 18
+                        ),
+                      ),
+                      Text(
+                        "${viewModel.shoppingList!.itemsCount.toString()} varer i alt",
+                        style: TextStyle(
+                          fontSize: 18
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Sidst redigeret: ${DateFormat("dd-MM-yyyy").format(viewModel.shoppingList!.updatedAt!)}"
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    maxLength: 25,
+                    autocorrect: true,
+
+                    decoration: InputDecoration(
+                      prefixIcon: IconButton(
+                        icon: Icon(
+                          Icons.add
+                        ),
+                        onPressed: () => print('ok'),
+                      ),
+                        labelText: "Tilføj vare",
+                        labelStyle: TextStyle(
+                        )
+                    )
+                  )
+
+                ],
+              ),
+            )
           )
               : null
         )
@@ -49,5 +113,5 @@ class ShoppingListItemView extends StatelessWidget{
 class ShoppingListItemViewArguments{
   final int? shoppingListId;
 
-  ShoppingListItemViewArguments(this.shoppingListId);
+  ShoppingListItemViewArguments({this.shoppingListId});
 }

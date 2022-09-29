@@ -50,60 +50,67 @@ class ShoppingListView extends StatelessWidget{
                   padding: const EdgeInsets.symmetric(
                     horizontal: 5
                   ),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)
+                  child: GestureDetector(
+                    onTap: () =>  Navigator.pushNamed(
+                        context,
+                        '/shoppingListItem',
+                        arguments: ShoppingListItemViewArguments(shoppingListId: viewModel.shoppingLists[index].id)
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Container(
-                        //color: Colors.red,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${viewModel.shoppingLists[index].itemsCount.toString()} varer"
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  viewModel.shoppingLists[index].name.toString(),
-                                ),
-
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                const Text(
-                                "Sidst updateret"
-                                ),
-                                Text(
-                                  DateFormat("dd-MM-yyyy").format(viewModel.shoppingLists[index].updatedAt!)
-                                )
-                                ],
-                            ),
-                            viewModel.shoppingListDeleteLoading.containsKey(viewModel.shoppingLists[index].id) == true
-                                ? IconButton(
-                              onPressed: () async => viewModel.removeShoppingList(viewModel.shoppingLists[index].id),
-                              icon: const Icon(
-                                Icons.delete_forever,
-                                color: Colors.grey,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Container(
+                          //color: Colors.red,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "${viewModel.shoppingLists[index].itemsCount.toString()} varer"
                               ),
-                            )
-                                : IconButton(
-                                  onPressed: () async => viewModel.removeShoppingList(viewModel.shoppingLists[index].id),
-                                  icon: const Icon(
-                                    Icons.delete_forever,
-                                    color: Colors.red,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    viewModel.shoppingLists[index].name.toString(),
                                   ),
-                                )
+
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  const Text(
+                                  "Sidst updateret"
+                                  ),
+                                  Text(
+                                    DateFormat("dd-MM-yyyy").format(viewModel.shoppingLists[index].updatedAt!)
+                                  )
+                                  ],
+                              ),
+                              viewModel.shoppingListDeleteLoading.containsKey(viewModel.shoppingLists[index].id) == true
+                                  ? IconButton(
+                                onPressed: () async => viewModel.removeShoppingList(viewModel.shoppingLists[index].id),
+                                icon: const Icon(
+                                  Icons.delete_forever,
+                                  color: Colors.grey,
+                                ),
+                              )
+                                  : IconButton(
+                                    onPressed: () async => viewModel.removeShoppingList(viewModel.shoppingLists[index].id),
+                                    icon: const Icon(
+                                      Icons.delete_forever,
+                                      color: Colors.red,
+                                    ),
+                                  )
 
 
 
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

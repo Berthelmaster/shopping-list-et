@@ -29,11 +29,13 @@ class ShoppingListRepository{
   }
 
   Future<ShoppingList> getById(int shoppingListId) async{
-    var uri = Uri.parse("$httpBaseAddress/api/v1/shoppinglist");
+    var uri = Uri.parse("$httpBaseAddress/api/v1/shoppinglist?id=$shoppingListId");
 
     var response = await http.get(uri, headers: <String,String>{
       'Content-Type': 'application/json; charset=UTF-8'
     });
+
+    print("response: ${response.body}");
 
     return ShoppingList.fromJson(json.decode(response.body));
   }

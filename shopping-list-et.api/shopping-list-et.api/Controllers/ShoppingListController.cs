@@ -20,7 +20,7 @@ namespace shopping_list_et.api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Get([FromQuery] int id, CancellationToken cancellationToken)
         {
             var command = new ShoppingListGetCommand()
             {
