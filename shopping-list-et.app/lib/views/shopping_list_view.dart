@@ -15,7 +15,6 @@ class ShoppingListView extends StatelessWidget{
     return ViewModelBuilder<ShoppingListViewModel>.reactive(
       viewModelBuilder: () => ShoppingListViewModel(),
       onModelReady: (viewModel) => viewModel.initialise(),
-      onDispose: (viewModel) => viewModel.dispose(),
       builder: (context, viewModel, child) =>
         Scaffold(
           appBar: AppBar(

@@ -3,6 +3,7 @@ import 'package:signalr_netcore/hub_connection.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
 import '../environment.dart';
 import 'package:event/event.dart';
+import 'dart:convert';
 
 class SignalrClient{
   late HubConnection hubConnection;
@@ -49,7 +50,9 @@ class SignalrClient{
     });
 
     hubConnection.on("OnItemChangedEvent", (argument) {
-      var shoppingListId = int.parse(argument.toString());
+      print(argument);
+      var shoppingListId = int.parse(argument![0].toString());
+      print(shoppingListId);
       onShoppingListItemUpdatedEvent.broadcast(ShoppingListItemEventArgs(shoppingListId));
     });
   }

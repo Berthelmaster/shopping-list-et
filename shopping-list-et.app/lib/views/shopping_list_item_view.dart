@@ -46,7 +46,7 @@ class ShoppingListItemView extends StatelessWidget{
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Row(
@@ -55,31 +55,31 @@ class ShoppingListItemView extends StatelessWidget{
                     children: [
                       Text(
                         "${viewModel.shoppingList!.items!.where((element) => !element.checked).length} varer mangler",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18
                         ),
                       ),
                       Text(
                         "${viewModel.shoppingList!.items!.where((element) => element.checked).length} varer i kurven",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18
                         ),
                       ),
                       Text(
                         "${viewModel.shoppingList!.itemsCount.toString()} varer i alt",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(
                     "Sidst redigeret: ${DateFormat("dd-MM-yyyy").format(viewModel.shoppingList!.updatedAt!)}"
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   TextFormField(
@@ -87,19 +87,48 @@ class ShoppingListItemView extends StatelessWidget{
                     autocorrect: true,
 
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: const Icon(
+                          Icons.camera_alt
+                        ),
+                        onPressed: () => print("ok"),
+                      ),
                       prefixIcon: IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.add
                         ),
                         onPressed: () => print('ok'),
                       ),
                         labelText: "Tilføj vare",
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                         )
                     )
-                  )
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                        itemCount: viewModel.shoppingList!.items!.length,
+                        separatorBuilder: (BuildContext context, int index) => const Divider(),
+                        itemBuilder: (BuildContext context, int index){
+                          return Column(
+                            children: [
+                              CheckboxListTile(
+                                title: Text(
+                                  viewModel.shoppingList!.items![index].text
+                                ), //    <-- label
+                                value: viewModel.shoppingList!.items![index].checked,
+                                controlAffinity: ListTileControlAffinity.leading,
 
+                                onChanged: (newValue) async {
+                                  await viewModel.setCheckedValue(viewModel.shoppingList!.items![index].id, newValue);
+                                },
+                              ),
+                            ],
+                          );
+                        }
+                    ),
+                  )
                 ],
+
               ),
             )
           )

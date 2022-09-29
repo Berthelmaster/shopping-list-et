@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace shopping_list_et.application.ShoppingListItemCheck
 {
-    internal class ShoppingListItemCheckCommandHandler : IRequestHandler<ShoppingListItemCheckCommand, Item>
+    public class ShoppingListItemCheckCommandHandler : IRequestHandler<ShoppingListItemCheckCommand, Item>
     {
         private readonly ApplicationDbContext context;
 
@@ -23,13 +23,18 @@ namespace shopping_list_et.application.ShoppingListItemCheck
         public async Task<Item> Handle(ShoppingListItemCheckCommand request, CancellationToken cancellationToken)
         {
             var item = await context.Items
+                .Include(x => x.ShoppingList)
                 .Where(x => x.Id == request.ItemId)
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (item is null)
                 throw new ArgumentNullException(nameof(item));
 
+            if (item.ShoppingList is null)
+                throw new ArgumentNullException(nameof(item.ShoppingList));
+
             item.Checked = request.isChecked;
+            item.ShoppingList.UpdatedAt = DateTime.UtcNow;
 
             await context.SaveChangesAsync(cancellationToken);
 
