@@ -9,23 +9,37 @@ class ShoppingListItemView extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    final shoppingListId = (ModalRoute.of(context)!.settings.arguments as ShoppingListItemViewArguments).shoppingListId;
+    final shoppingListId = ModalRoute.of(context)!.settings.arguments != null
+        ? (ModalRoute.of(context)!.settings.arguments as ShoppingListItemViewArguments).shoppingListId
+        : ShoppingListItemViewArguments(null).shoppingListId;
 
     // TODO: implement build
     return ViewModelBuilder<ShoppingListItemViewModel>.reactive(
         viewModelBuilder: () => ShoppingListItemViewModel(),
+        onModelReady: (viewModel) async => await viewModel.initializeOrCreateShoppingList(shoppingListId),
         builder: (context, viewModel, child) =>
         Scaffold(
           appBar: AppBar(
             title: Text(
-              'Heloo!' + shoppingListId.toString()
+              'Heloo!'
             ),
+              bottom: viewModel.modelReady() == false
+                  ? PreferredSize(
+                  preferredSize: const Size.fromHeight(6.0),
+                  child: LinearProgressIndicator(
+                      backgroundColor: Colors.red.withOpacity(0.6),
+                      valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue)
+                  )
+              )
+                  : null
           ),
-          body: Center(
+          body: viewModel.modelReady() == true
+              ? Center(
             child: Text(
-                'Hello'
+                "Hello ${viewModel.shoppingList!.name}"
             ),
-          ),
+          )
+              : null
         )
     );
   }

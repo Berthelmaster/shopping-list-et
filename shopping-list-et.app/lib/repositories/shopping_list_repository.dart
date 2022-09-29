@@ -28,4 +28,24 @@ class ShoppingListRepository{
     });
   }
 
+  Future<ShoppingList> getById(int shoppingListId) async{
+    var uri = Uri.parse("$httpBaseAddress/api/v1/shoppinglist");
+
+    var response = await http.get(uri, headers: <String,String>{
+      'Content-Type': 'application/json; charset=UTF-8'
+    });
+
+    return ShoppingList.fromJson(json.decode(response.body));
+  }
+
+  Future<ShoppingList> create() async{
+    var uri = Uri.parse("$httpBaseAddress/api/v1/shoppinglist");
+
+    var response = await http.post(uri, headers: <String,String>{
+      'Content-Type': 'application/json; charset=UTF-8'
+    });
+
+    return ShoppingList.fromJson(json.decode(response.body));
+  }
+
 }
