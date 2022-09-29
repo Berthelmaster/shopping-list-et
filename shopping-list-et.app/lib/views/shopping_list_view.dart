@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:shopping_list_et_app/view_models/shopping_list_view_model.dart';
+import 'package:shopping_list_et_app/views/shopping_list_item_view.dart';
 import 'package:stacked/stacked.dart';
 
 class ShoppingListView extends StatelessWidget{
+  const ShoppingListView({super.key});
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return ViewModelBuilder<ShoppingListViewModel>.reactive(
       viewModelBuilder: () => ShoppingListViewModel(),
       onModelReady: (viewModel) => viewModel.initialise(),
+      onDispose: (viewModel) => viewModel.dispose(),
       builder: (context, viewModel, child) =>
         Scaffold(
           appBar: AppBar(
@@ -19,6 +24,24 @@ class ShoppingListView extends StatelessWidget{
                 "Emma og Thomas' Indkøbslister <3"
               ),
             ),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.add_business_outlined),
+                tooltip: 'Show Snackbar',
+                onPressed: () {
+                  Navigator.pushNamed(context, '/shoppingListItem');
+                },
+              ),
+            ],
+            bottom: viewModel.displayMainLoadingIndicator() == true
+                  ? PreferredSize(
+              preferredSize: const Size.fromHeight(6.0),
+              child: LinearProgressIndicator(
+                backgroundColor: Colors.red.withOpacity(0.6),
+                valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue)
+              )
+            )
+              : null
           ),
           body: ListView.builder(
             itemCount: viewModel.shoppingLists.length,
@@ -63,16 +86,16 @@ class ShoppingListView extends StatelessWidget{
                                 ],
                             ),
                             viewModel.shoppingListDeleteLoading.containsKey(viewModel.shoppingLists[index].id) == true
-                                ? Transform.scale(
-                              scale: 0.5,
-                                  child: CircularProgressIndicator(
-                                  color: Colors.grey,
-
-                            ),
-                                )
+                                ? IconButton(
+                              onPressed: () async => viewModel.removeShoppingList(viewModel.shoppingLists[index].id),
+                              icon: const Icon(
+                                Icons.delete_forever,
+                                color: Colors.grey,
+                              ),
+                            )
                                 : IconButton(
                                   onPressed: () async => viewModel.removeShoppingList(viewModel.shoppingLists[index].id),
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.delete_forever,
                                     color: Colors.red,
                                   ),

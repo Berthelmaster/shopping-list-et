@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:event/event.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
 
@@ -16,10 +17,11 @@ class ShoppingListViewModel extends ChangeNotifier{
   void initialise() async {
     shoppingLists = await shoppingListRepository.getAll();
 
-
+    signalrClient.onShoppingListUpdatedEvent.subscribe(onShoppingListUpdated);
   }
 
-  void onItemListChanged() async {
+  void onShoppingListUpdated(EventArgs? eventArgs) async{
+
     shoppingLists = await shoppingListRepository.getAll();
 
     shoppingListDeleteLoading.clear();
@@ -30,8 +32,19 @@ class ShoppingListViewModel extends ChangeNotifier{
   Future<void> removeShoppingList(int shoppingListId) async {
     shoppingListDeleteLoading[shoppingListId] = true;
 
-    notifyListeners();
+    await shoppingListRepository.remove(shoppingListId);
 
-    print(shoppingListId.toString());
+    notifyListeners();
+  }
+
+  bool displayMainLoadingIndicator() {
+    return shoppingListDeleteLoading.isNotEmpty;
+  }
+
+  @override
+  void dispose() {
+    signalrClient.onShoppingListUpdatedEvent.unsubscribe(onShoppingListUpdated);
+
+    super.dispose();
   }
 }

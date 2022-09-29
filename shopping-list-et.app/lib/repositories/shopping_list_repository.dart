@@ -20,4 +20,12 @@ class ShoppingListRepository{
     return shoppingLists;
   }
 
+  Future<void> remove(int shoppingListId) async{
+    var uri = Uri.parse("$httpBaseAddress/api/v1/shoppinglist?id=$shoppingListId");
+
+    var response = await http.delete(uri, headers: <String,String>{
+      'Content-Type': 'application/json; charset=UTF-8'
+    });
+  }
+
 }

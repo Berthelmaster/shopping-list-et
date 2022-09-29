@@ -7,8 +7,8 @@ import 'package:event/event.dart';
 class SignalrClient{
   late HubConnection hubConnection;
   bool connected = false;
-  Event onShoppingListUpdated = Event();
-  Event<ShoppingListItemEventArgs> onShoppingListItemUpdated = Event<ShoppingListItemEventArgs>();
+  Event onShoppingListUpdatedEvent = Event();
+  Event<ShoppingListItemEventArgs> onShoppingListItemUpdatedEvent = Event<ShoppingListItemEventArgs>();
 
   SignalrClient(){
 
@@ -45,12 +45,12 @@ class SignalrClient{
   
   void setupEvents(){
     hubConnection.on("OnShoppingListChangedEvent", (argument) {
-      onShoppingListUpdated.broadcast();
+      onShoppingListUpdatedEvent.broadcast();
     });
 
     hubConnection.on("OnItemChangedEvent", (argument) {
       var shoppingListId = int.parse(argument.toString());
-      onShoppingListItemUpdated.broadcast(ShoppingListItemEventArgs(shoppingListId));
+      onShoppingListItemUpdatedEvent.broadcast(ShoppingListItemEventArgs(shoppingListId));
     });
   }
 

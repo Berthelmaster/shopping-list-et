@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shopping_list_et_app/locator.dart';
 import 'package:shopping_list_et_app/repositories/shopping_list_repository.dart';
+import 'package:shopping_list_et_app/views/shopping_list_item_view.dart';
 import 'package:shopping_list_et_app/views/shopping_list_view.dart';
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
 
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => ShoppingListView()
+        '/': (context) => ShoppingListView(),
+        '/shoppingListItem': (context) => const ShoppingListItemView(),
       },
     );
   }

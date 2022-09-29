@@ -6,7 +6,6 @@ import 'repositories/shopping_list_repository.dart';
 final locator = GetIt.instance;
 
 void setup(){
-  print("HIT2");
   locator.registerLazySingleton<SignalrClient>(() => SignalrClient());
   locator.registerLazySingleton<ShoppingListItemRepository>(() => ShoppingListItemRepository());
   locator.registerLazySingleton<ShoppingListRepository>(() => ShoppingListRepository());
