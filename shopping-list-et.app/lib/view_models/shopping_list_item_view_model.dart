@@ -12,6 +12,7 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   var signalrClient = locator.get<SignalrClient>();
   ShoppingList? shoppingList;
   bool modelReady() => shoppingList != null;
+  final addItemFormFieldController = TextEditingController();
 
   Future<void> initializeOrCreateShoppingList(int? shoppingListId) async {
     signalrClient.onShoppingListItemUpdatedEvent.subscribe(onShoppingListItemUpdated);
@@ -43,6 +44,12 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     filterShoppingListItemsByChecked(shoppingList);
 
     notifyListeners();
+  }
+
+  Future<void> addItemButtonClicked() async{
+    var myText = addItemFormFieldController.text;
+
+    await shoppingListItemRepository.addItem(myText, shoppingList!.id);
   }
 
   void filterShoppingListItemsByChecked(ShoppingList? shoppingList){

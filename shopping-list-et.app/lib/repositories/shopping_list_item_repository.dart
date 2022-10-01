@@ -13,4 +13,13 @@ class ShoppingListItemRepository{
     });
   }
 
+  Future<void> addItem(String text, int shoppingListId) async{
+    var uri = Uri.parse("$httpBaseAddress/api/v1/shoppinglistitem?text=$text&shoppingListId=$shoppingListId");
+
+    var response = await http.post(uri, headers: <String,String>{
+      'Content-Type': 'application/json; charset=UTF-8'
+    });
+
+  }
+
 }
