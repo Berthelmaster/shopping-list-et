@@ -10,7 +10,8 @@ class ShoppingListRepository{
     var uri = Uri.parse("$httpBaseAddress/api/v1/shoppinglist/all");
 
     var response = await http.get(uri, headers: <String,String>{
-      'Content-Type': 'application/json; charset=UTF-8'
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Access-Control-Allow-Origin': '*'
     });
 
     var shoppingLists = List<ShoppingList>.from(json.decode(response.body).map((e) => ShoppingList.fromJson(e)));
@@ -24,7 +25,8 @@ class ShoppingListRepository{
     var uri = Uri.parse("$httpBaseAddress/api/v1/shoppinglist?id=$shoppingListId");
 
     var response = await http.delete(uri, headers: <String,String>{
-      'Content-Type': 'application/json; charset=UTF-8'
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Access-Control-Allow-Origin': '*'
     });
   }
 
