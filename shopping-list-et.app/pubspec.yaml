@@ -42,6 +42,8 @@ dependencies:
   http: ^0.13.5
   event: ^2.1.2
   intl: ^0.17.0
+  shared_preferences: ^2.0.15
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

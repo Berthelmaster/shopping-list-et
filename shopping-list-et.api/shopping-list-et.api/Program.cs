@@ -3,6 +3,7 @@ using shopping_list_et.infrastructure.Context;
 using MediatR;
 using shopping_list_et.application;
 using shopping_list_et.infrastructure.SignalR;
+using shopping_list_et.api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServiceCollection();
 
+var shoppingListConfiguration = new ShoppingListConfiguration();
+
+builder.Configuration.Bind(shoppingListConfiguration);
+builder.Services.AddSingleton(shoppingListConfiguration);
+
 var devCorsPolicy = "devCorsPolicy";
 builder.Services.AddCors(options =>
 {
@@ -34,6 +40,7 @@ builder.Services.AddCors(options =>
         //builder.SetIsOriginAllowed(origin => true);
     });
 });
+
 
 var app = builder.Build();
 
@@ -46,6 +53,7 @@ using (var scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
+
 
 app.UseCors(devCorsPolicy);
 

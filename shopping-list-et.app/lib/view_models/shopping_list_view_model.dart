@@ -18,6 +18,8 @@ class ShoppingListViewModel extends ChangeNotifier{
     shoppingLists = await shoppingListRepository.getAll();
 
     signalrClient.onShoppingListUpdatedEvent.subscribe(onShoppingListUpdated);
+
+    notifyListeners();
   }
 
   void onShoppingListUpdated(EventArgs? eventArgs) async{

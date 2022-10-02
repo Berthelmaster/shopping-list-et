@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shopping_list_et_app/locator.dart';
 import 'package:shopping_list_et_app/repositories/shopping_list_repository.dart';
+import 'package:shopping_list_et_app/sp.dart';
+import 'package:shopping_list_et_app/views/shopping_list_access_view.dart';
 import 'package:shopping_list_et_app/views/shopping_list_item_view.dart';
 import 'package:shopping_list_et_app/views/shopping_list_view.dart';
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
@@ -11,11 +13,14 @@ import 'models/shopping_list.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setup();
-  runApp(const MyApp());
+  var token = await getAccessToken();
+  runApp(MyApp(token));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp(this.token, {super.key});
+
+  final String? token;
 
   // This widget is the root of your application.
   @override
@@ -34,16 +39,16 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.lightBlue,
       ),
-      initialRoute: '/',
+
+      initialRoute: token == null ? '/access' : '/shoppingLists',
       routes: {
-        '/': (context) => const ShoppingListView(),
+        '/access': (context) => const ShoppingListAccessView(),
+        '/shoppingLists': (context) => const ShoppingListView(),
         '/shoppingListItem': (context) => const ShoppingListItemView(),
       },
     );
   }
 }
-
-
 
 /*
 class MyHomePage extends StatefulWidget {
