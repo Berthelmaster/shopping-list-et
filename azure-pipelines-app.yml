@@ -23,3 +23,16 @@ steps:
   inputs:
     projectDirectory: 'shopping-list-et.app/'
     arguments: 'build web'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'shopping-list-et.app/build/web'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
