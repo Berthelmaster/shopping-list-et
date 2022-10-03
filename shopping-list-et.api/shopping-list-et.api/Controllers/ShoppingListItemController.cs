@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using shopping_list_et.application.Events;
 using shopping_list_et.application.Events.ShoppingListItemChanged;
+using shopping_list_et.application.Events.ShoppingListUpdated;
 using shopping_list_et.application.ShoppingListCreate;
 using shopping_list_et.application.ShoppingListItemCheck;
 using shopping_list_et.application.ShoppingListItemCreate;
@@ -38,6 +39,13 @@ namespace shopping_list_et.api.Controllers
             };
 
             await mediator.Publish(@event, cancellationToken);
+
+            var @eventLists = new ShoppingListUpdatedEvent()
+            {
+
+            };
+
+            await mediator.Publish(@eventLists, cancellationToken);
 
             return Ok(response);
         }
