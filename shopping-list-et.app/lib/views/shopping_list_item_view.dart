@@ -19,8 +19,6 @@ class ShoppingListItemView extends StatelessWidget {
         .arguments as ShoppingListItemViewArguments).shoppingListId
         : ShoppingListItemViewArguments(shoppingListId: null).shoppingListId;
 
-    print(shoppingListId.toString());
-
     // TODO: implement build
     return ViewModelBuilder<ShoppingListItemViewModel>.reactive(
         viewModelBuilder: () => ShoppingListItemViewModel(),
@@ -111,7 +109,11 @@ class ShoppingListItemView extends StatelessWidget {
                                     icon: const Icon(
                                         Icons.add
                                     ),
-                                    onPressed: () async => await viewModel.addItemButtonClicked(),
+                                    onPressed: () async {
+                                      await viewModel.addItemButtonClicked();
+                                      FocusScope.of(context).unfocus();
+                                      viewModel.addItemFormFieldController.clear();
+                                    },
                                   ),
                                   labelText: "Tilføj vare",
                                   labelStyle: const TextStyle(
