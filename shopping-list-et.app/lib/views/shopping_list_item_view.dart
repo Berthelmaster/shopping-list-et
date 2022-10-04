@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:shopping_list_et_app/view_models/shopping_list_item_view_model.dart';
 import 'package:stacked/stacked.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ShoppingListItemView extends StatelessWidget {
   const ShoppingListItemView({super.key});
@@ -127,25 +128,34 @@ class ShoppingListItemView extends StatelessWidget {
                                 separatorBuilder: (BuildContext context,
                                     int index) => const Divider(),
                                 itemBuilder: (BuildContext context, int index) {
-                                  return Column(
-                                    children: [
-                                      CheckboxListTile(
-                                        title: Text(
-                                            viewModel.shoppingList!
-                                                .items![index].text
-                                        ), //    <-- label
-                                        value: viewModel.shoppingList!
-                                            .items![index].checked,
-                                        controlAffinity: ListTileControlAffinity
-                                            .leading,
+                                  return AnimationConfiguration.staggeredList(
+                                    position: index,
+                                    duration: const Duration(milliseconds: 375),
+                                    child: SlideAnimation(
+                                      verticalOffset: 50.0,
+                                      child: FadeInAnimation(
+                                        child: Column(
+                                          children: [
+                                            CheckboxListTile(
+                                              title: Text(
+                                                  viewModel.shoppingList!
+                                                      .items![index].text
+                                              ), //    <-- label
+                                              value: viewModel.shoppingList!
+                                                  .items![index].checked,
+                                              controlAffinity: ListTileControlAffinity
+                                                  .leading,
 
-                                        onChanged: (newValue) async {
-                                          await viewModel.setCheckedValue(
-                                              viewModel.shoppingList!
-                                                  .items![index].id, newValue);
-                                        },
+                                              onChanged: (newValue) async {
+                                                await viewModel.setCheckedValue(
+                                                    viewModel.shoppingList!
+                                                        .items![index].id, newValue);
+                                              },
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ],
+                                    ),
                                   );
                                 }
                             ),
