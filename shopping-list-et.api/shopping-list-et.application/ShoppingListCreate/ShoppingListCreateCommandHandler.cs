@@ -24,7 +24,7 @@ namespace shopping_list_et.application.ShoppingListCreate
             {
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-                Name = $"Shoppingliste - {DateTime.UtcNow.ToString("dd/MM/yyyy")}",
+                Name = $"Indkøb: {DateTime.UtcNow.ToString("dd/MM/yyyy")}",
                 Active = true,
                 Items = new List<Item>(0)
             };

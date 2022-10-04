@@ -37,7 +37,11 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.lightBlue,
+        appBarTheme: const AppBarTheme(
+          color: Color(0xFF151026)
+        ),
+        scaffoldBackgroundColor: Color.fromRGBO(210, 179, 120, 0.9),
+
       ),
 
       initialRoute: token == null ? '/access' : '/shoppingLists',
