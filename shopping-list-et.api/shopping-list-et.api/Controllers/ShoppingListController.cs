@@ -5,6 +5,7 @@ using shopping_list_et.application.ShoppingListCreate;
 using shopping_list_et.application.ShoppingListDelete;
 using shopping_list_et.application.ShoppingListGet;
 using shopping_list_et.application.ShoppingListGetAll;
+using shopping_list_et.application.ShoppingListModifyName;
 
 namespace shopping_list_et.api.Controllers
 {
@@ -63,6 +64,27 @@ namespace shopping_list_et.api.Controllers
             await mediator.Publish(@event, cancellationToken);
 
             return Ok(response);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> ModifyName([FromQuery] int shoppingListId, [FromQuery] string newName, CancellationToken cancellationToken)
+        {
+            var command = new ShoppingListModifyNameCommand()
+            {
+                ShoppingListId = shoppingListId,
+                ShoppingListName = newName
+            };
+
+            var response = await mediator.Send(command, cancellationToken);
+           
+            var @event = new ShoppingListUpdatedEvent()
+            {
+
+            };
+
+            await mediator.Publish(@event, cancellationToken);
+
+            return Ok();
         }
 
         [HttpDelete]
