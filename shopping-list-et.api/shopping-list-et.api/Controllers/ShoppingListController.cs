@@ -75,6 +75,7 @@ namespace shopping_list_et.api.Controllers
                 ShoppingListName = newName
             };
 
+
             var response = await mediator.Send(command, cancellationToken);
            
             var @event = new ShoppingListUpdatedEvent()
