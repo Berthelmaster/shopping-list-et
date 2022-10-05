@@ -21,7 +21,7 @@ class ShoppingListView extends StatelessWidget {
                 appBar: AppBar(
                     title: const Center(
                       child: Text(
-                          "Is web: $kIsWeb"
+                          "Alle Shoppinglister"
                       ),
                     ),
                     actions: <Widget>[
@@ -93,7 +93,7 @@ class ShoppingListView extends StatelessWidget {
                                     Column(
                                       children: [
                                         const Text(
-                                            "Sidst updateret"
+                                            "Sidst opdateret"
                                         ),
                                         Text(
                                             DateFormat("dd-MM-yyyy").format(
