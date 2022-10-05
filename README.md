@@ -13,4 +13,5 @@
 | Publish to Web - PWA              |    &#10004;           |
 | Setup CICD Flows              |      &#10004;         |
 | Implemented sign in              |      &#10004;         |
+| Shopping lists view should update on indiviual shopping list items updates for all shoppinglists |      &#10006;          |
 
