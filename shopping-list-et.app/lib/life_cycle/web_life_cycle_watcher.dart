@@ -6,12 +6,11 @@ import 'package:universal_html/html.dart' as html;
 
 class WebLifeCycleWatcher with ILifeCycleWatcherStrategy{
   SignalrClient? signalrClient;
+  int counter = 0;
 
 
   void onVisibilityChange(html.Event e) {
-    if(html.document.visibilityState == 'visible'){
-      signalrClient!.checkConnection();
-    }
+    signalrClient!.checkConnection();
   }
 
   @override

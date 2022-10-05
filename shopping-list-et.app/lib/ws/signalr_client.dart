@@ -33,9 +33,26 @@ class SignalrClient{
   }
 
   void checkConnection() {
-    if (!connected) {
-      hubConnection.start();
-      connected = true;
+    switch(hubConnection.state) {
+      case HubConnectionState.Disconnected:
+        hubConnection.start();
+        break;
+      case HubConnectionState.Connecting:
+      // TODO: Handle this case.
+        break;
+      case HubConnectionState.Connected:
+      // TODO: Handle this case.
+        break;
+      case HubConnectionState.Disconnecting:
+        hubConnection.start();
+        break;
+      case HubConnectionState.Reconnecting:
+        hubConnection.start();
+        break;
+      case null:
+        hubConnection.start();
+        break;
+
     }
   }
 
