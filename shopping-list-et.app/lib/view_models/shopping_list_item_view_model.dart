@@ -46,6 +46,10 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
+  Future<void> removeItem(int id) async{
+    await shoppingListItemRepository.removeItem(id);
+  }
+
   Future<void> addItemButtonClicked() async{
     var myText = addItemFormFieldController.text;
 

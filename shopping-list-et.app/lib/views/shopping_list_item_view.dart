@@ -128,6 +128,9 @@ class ShoppingListItemView extends StatelessWidget {
                                 separatorBuilder: (BuildContext context,
                                     int index) => const Divider(),
                                 itemBuilder: (BuildContext context, int index) {
+                                  var currentItem = viewModel.shoppingList!
+                                      .items![index];
+
                                   return AnimationConfiguration.staggeredList(
                                     position: index,
                                     duration: const Duration(milliseconds: 375),
@@ -136,21 +139,23 @@ class ShoppingListItemView extends StatelessWidget {
                                       child: FadeInAnimation(
                                         child: Column(
                                           children: [
-                                            CheckboxListTile(
-                                              title: Text(
-                                                  viewModel.shoppingList!
-                                                      .items![index].text
-                                              ), //    <-- label
-                                              value: viewModel.shoppingList!
-                                                  .items![index].checked,
-                                              controlAffinity: ListTileControlAffinity
-                                                  .leading,
-
-                                              onChanged: (newValue) async {
-                                                await viewModel.setCheckedValue(
-                                                    viewModel.shoppingList!
-                                                        .items![index].id, newValue);
+                                            Dismissible(
+                                              key: Key(currentItem.id.toString()),
+                                              onDismissed: (direction) async {
+                                                await viewModel.removeItem(currentItem.id);
                                               },
+                                              child: CheckboxListTile(
+                                                title: Text(
+                                                    currentItem.text
+                                                ), //    <-- label
+                                                value: currentItem.checked,
+                                                controlAffinity: ListTileControlAffinity
+                                                    .leading,
+                                                onChanged: (newValue) async {
+                                                  await viewModel.setCheckedValue(
+                                                      currentItem.id, newValue);
+                                                },
+                                              ),
                                             ),
                                           ],
                                         ),
