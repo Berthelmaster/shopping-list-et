@@ -7,7 +7,7 @@ import 'package:shopping_list_et_app/views/shopping_list_access_view.dart';
 import 'package:shopping_list_et_app/views/shopping_list_item_view.dart';
 import 'package:shopping_list_et_app/views/shopping_list_view.dart';
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
-import 'life_cycle/life_cycle_strategy.dart';
+import 'life_cycle/life_cycle_watcher_strategy.dart';
 import 'models/shopping_list.dart';
 
 void main() async {

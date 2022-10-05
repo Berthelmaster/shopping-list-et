@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shopping_list_et_app/locator.dart';
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
 
-import 'life_cycle_strategy.dart';
+import 'life_cycle_watcher_strategy.dart';
 
 class MobileLifeCycleWatcher
     extends WidgetsBindingObserver
-    implements ILifeCycleStrategy {
+    implements ILifeCycleWatcherStrategy {
   SignalrClient? signalrClient;
 
   @override

@@ -1,10 +1,10 @@
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
 import '../locator.dart';
-import 'life_cycle_strategy.dart';
+import 'life_cycle_watcher_strategy.dart';
 import 'package:universal_html/html.dart' as html;
 
 
-class WebLifeCycleWatcher with ILifeCycleStrategy{
+class WebLifeCycleWatcher with ILifeCycleWatcherStrategy{
   SignalrClient? signalrClient;
 
 
