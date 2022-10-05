@@ -14,7 +14,6 @@
 | Setup CICD Flows              |      &#10004;         |
 | Implemented sign in              |      &#10004;         |
 | Shopping lists view should update on indiviual shopping list items updates for all shoppinglists |      &#10006;          |
-| Recover deleted shopping list items |      &#10006;          |
 | Recover deleted shopping lists |      &#10006;          |
 | Clone shopping list |      &#10006;          |
 | Export shopping list to Social media contacts |      &#10006;          |
