@@ -2,6 +2,6 @@
 
 | Tasks  | Done Header |
 | ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| Improve websocket connction stability  | --  |
+| Add cache to app item list  | --  |
 |               |               |
