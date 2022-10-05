@@ -12,4 +12,5 @@
 | Publish to iOS              |      &#10006;          |
 | Publish to Web - PWA              |    &#10004;           |
 | Setup CICD Flows              |      &#10004;         |
+| Implemented sign in              |      &#10004;         |
 
