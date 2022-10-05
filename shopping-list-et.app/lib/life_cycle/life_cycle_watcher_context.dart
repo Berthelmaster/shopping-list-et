@@ -5,7 +5,7 @@ import 'mobile_life_cycle_watcher.dart';
 import 'web_life_cycle_watcher.dart';
 
 class LifeCycleWatcherContext {
-  ILifeCycleWatcherStrategy getRuntimeLifeCycleStrategy(){
+  ILifeCycleWatcherStrategy getLifeCycleWatcherStrategy(){
     if(kIsWeb) {
       return WebLifeCycleWatcher();
     }

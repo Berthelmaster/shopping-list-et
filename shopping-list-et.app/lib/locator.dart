@@ -13,7 +13,7 @@ void setup(){
   locator.registerLazySingleton<ShoppingListRepository>(() => ShoppingListRepository());
   locator.registerLazySingleton<ShoppingListAccessRepository>(() => ShoppingListAccessRepository());
 
-  var lifeCycleWatcherStrategy = LifeCycleWatcherContext().getRuntimeLifeCycleStrategy();
+  var lifeCycleWatcherStrategy = LifeCycleWatcherContext().getLifeCycleWatcherStrategy();
   lifeCycleWatcherStrategy.init();
   locator.registerLazySingleton(() => lifeCycleWatcherStrategy);
 }
