@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shopping_list_et_app/locator.dart';
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
 
-class LifeCycleWatcher extends WidgetsBindingObserver {
+import 'life_cycle_watcher.dart';
+
+class MobileLifeCycleWatcher
+    extends WidgetsBindingObserver
+    implements ILifeCycleWatcher {
   SignalrClient? signalrClient;
 
   @override
@@ -15,13 +19,13 @@ class LifeCycleWatcher extends WidgetsBindingObserver {
         onResumed();
         break;
       case AppLifecycleState.inactive:
-        // TODO: Handle this case.
+      // TODO: Handle this case.
         break;
       case AppLifecycleState.paused:
-        // TODO: Handle this case.
+      // TODO: Handle this case.
         break;
       case AppLifecycleState.detached:
-        // TODO: Handle this case.
+      // TODO: Handle this case.
         break;
     }
   }
@@ -30,8 +34,10 @@ class LifeCycleWatcher extends WidgetsBindingObserver {
     signalrClient!.checkConnection();
   }
 
-  void init(){
+  @override
+  void init() {
     signalrClient = locator.get<SignalrClient>();
     WidgetsBinding.instance.addObserver(this);
   }
+
 }

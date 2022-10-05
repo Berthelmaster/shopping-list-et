@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:shopping_list_et_app/view_models/shopping_list_view_model.dart';
 import 'package:shopping_list_et_app/views/shopping_list_item_view.dart';
 import 'package:stacked/stacked.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class ShoppingListView extends StatelessWidget {
   const ShoppingListView({super.key});
@@ -20,7 +21,7 @@ class ShoppingListView extends StatelessWidget {
                 appBar: AppBar(
                     title: const Center(
                       child: Text(
-                          "Emma og Thomas' Indkøbslister <3"
+                          "Is web: $kIsWeb"
                       ),
                     ),
                     actions: <Widget>[
