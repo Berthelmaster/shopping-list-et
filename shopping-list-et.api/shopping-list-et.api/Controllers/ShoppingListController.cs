@@ -36,14 +36,10 @@ namespace shopping_list_et.api.Controllers
         [HttpGet("include/deleted")]
         public async Task<IActionResult> GetIncludingDeleted(CancellationToken cancellationToken)
         {
+            if (true)
+                return BadRequest();
+
             return Ok();
-
-
-
-
-
-
-
         }
 
         [HttpGet("all")]
