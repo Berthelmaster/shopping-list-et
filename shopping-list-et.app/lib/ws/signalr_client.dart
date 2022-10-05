@@ -50,9 +50,7 @@ class SignalrClient{
     });
 
     hubConnection.on("OnItemChangedEvent", (argument) {
-      print(argument);
       var shoppingListId = int.parse(argument![0].toString());
-      print(shoppingListId);
       onShoppingListItemUpdatedEvent.broadcast(ShoppingListItemEventArgs(shoppingListId));
     });
   }
