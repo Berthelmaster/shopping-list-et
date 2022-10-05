@@ -17,3 +17,4 @@
 | Recover deleted shopping lists |      &#10006;          |
 | Clone shopping list |      &#10006;          |
 | Export shopping list to Social media contacts |      &#10006;          |
+| Make shopping list item checks more responsive |    &#10004;           |
