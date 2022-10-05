@@ -8,11 +8,16 @@ import 'package:shopping_list_et_app/views/shopping_list_item_view.dart';
 import 'package:shopping_list_et_app/views/shopping_list_view.dart';
 import 'package:shopping_list_et_app/ws/signalr_client.dart';
 
+import 'LifeCycleWatcher.dart';
 import 'models/shopping_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setup();
+
+  var lifecycleSetup = locator.get<LifeCycleWatcher>();
+  lifecycleSetup.init();
+
   var token = await getAccessToken();
   runApp(MyApp(token));
 }
@@ -40,7 +45,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           color: Color(0xFF151026)
         ),
-        scaffoldBackgroundColor: Color.fromRGBO(210, 179, 120, 0.9),
+        scaffoldBackgroundColor: const Color.fromRGBO(210, 179, 120, 0.9),
 
       ),
 

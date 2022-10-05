@@ -16,8 +16,6 @@ class ShoppingListRepository{
 
     var shoppingLists = List<ShoppingList>.from(json.decode(response.body).map((e) => ShoppingList.fromJson(e)));
 
-    print(shoppingLists.length);
-
     return shoppingLists;
   }
 
@@ -36,8 +34,6 @@ class ShoppingListRepository{
     var response = await http.get(uri, headers: <String,String>{
       'Content-Type': 'application/json; charset=UTF-8'
     });
-
-    print("response: ${response.body}");
 
     return ShoppingList.fromJson(json.decode(response.body));
   }
