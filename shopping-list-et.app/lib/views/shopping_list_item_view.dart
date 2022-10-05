@@ -153,7 +153,7 @@ class ShoppingListItemView extends StatelessWidget {
                                                     .leading,
                                                 onChanged: (newValue) async {
                                                   await viewModel.setCheckedValue(
-                                                      currentItem.id, newValue);
+                                                      currentItem);
                                                 },
                                               ),
                                             ),

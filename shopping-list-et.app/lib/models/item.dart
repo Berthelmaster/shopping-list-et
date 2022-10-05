@@ -2,7 +2,7 @@ class Item{
   final int id;
   final String text;
   final DateTime createdAt;
-  final bool checked;
+  bool checked;
 
   Item(this.id, this.text, this.createdAt, this.checked);
 

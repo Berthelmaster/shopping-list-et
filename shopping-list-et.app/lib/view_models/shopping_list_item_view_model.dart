@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:shopping_list_et_app/repositories/shopping_list_item_repository.dart';
 
 import '../locator.dart';
+import '../models/item.dart';
 import '../models/shopping_list.dart';
 import '../repositories/shopping_list_repository.dart';
 import '../ws/signalr_client.dart';
@@ -30,8 +31,11 @@ class ShoppingListItemViewModel extends ChangeNotifier{
 
   }
 
-  Future<void> setCheckedValue(int id, bool? newValue) async{
-    await shoppingListItemRepository.updateChecked(id, newValue);
+  Future<void> setCheckedValue(Item item) async{
+    item.checked = !item.checked;
+    notifyListeners();
+
+    await shoppingListItemRepository.updateChecked(item.id, item.checked);
   }
 
   void onShoppingListItemUpdated(ShoppingListItemEventArgs? args) async{
