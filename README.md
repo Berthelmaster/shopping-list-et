@@ -1,7 +1,7 @@
 # shopping-list-et
 
-| Tasks  | Done Header |
+| Tasks  | Completed |
 | ------------- | ------------- |
-| Improve websocket connction stability  | --  |
-| Add cache to app item list  | --  |
+| Improve websocket connction stability  | &#10006;  |
+| Add cache to app item list  | &#10006;  |
 |               |               |
