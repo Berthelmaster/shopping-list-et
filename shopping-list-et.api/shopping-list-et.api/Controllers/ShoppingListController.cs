@@ -33,6 +33,12 @@ namespace shopping_list_et.api.Controllers
             return Ok(response);
         }
 
+        [HttpGet("include/deleted")]
+        public async Task<IActionResult> GetIncludingDeleted(CancellationToken cancellationToken)
+        {
+            return Ok();
+        }
+
         [HttpGet("all")]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
