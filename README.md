@@ -2,7 +2,7 @@
 
 | Tasks  | Completed |
 | ------------- | ------------- |
-| Improve websocket connction stability  | &#10006;  |
+| Improve websocket connction stability (Web / PWA, Android, iOS)  | &#10004;   |
 | Add cache to app item list  | &#10006;  |
 | Improve color schema              |    &#10004;           |
 | Add Generic name to shopping lists              |      &#10004;         |
