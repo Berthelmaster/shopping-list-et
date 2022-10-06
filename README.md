@@ -1,6 +1,8 @@
 # shopping-list-et
 
-| Tasks  | Completed |
+Priority 1-5 where 5 is the highest priority possible
+
+| Tasks  | Completed | Priority |
 | ------------- | ------------- |
 | Improve websocket connction stability (Web / PWA, Android, iOS)  | &#10004;   |
 | Add cache to app item list  | &#10006;  |
