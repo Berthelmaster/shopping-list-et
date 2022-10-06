@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
 import '../environment.dart';
@@ -33,6 +34,13 @@ class SignalrClient{
   }
 
   void checkConnection() {
+
+    if(hubConnection.state != HubConnectionState.Connected) {
+      Fluttertoast.showToast(
+          msg: "Connection: ${hubConnection.state}"
+      );
+    }
+
     switch(hubConnection.state) {
       case HubConnectionState.Disconnected:
         hubConnection.start();
