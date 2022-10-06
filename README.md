@@ -19,4 +19,4 @@ Priority 1-5 where 5 is the highest priority possible
 | Recover deleted shopping lists |      &#10006;          |         1          |
 | Clone shopping list |      &#10006;          |         1          |
 | Export shopping list to Social media contacts |      &#10006;          |         1          |
-| Make shopping list item checks more responsive |    &#10004;           |         1          |
+| Make shopping list item checks more responsive |    &#10004;           |         2          |
