@@ -17,6 +17,6 @@ Priority 1-5 where 5 is the highest priority possible
 | Implemented sign in              |      &#10004;         |         1          |
 | Shopping lists view should update on indiviual shopping list items updates for all shoppinglists |      &#10006;          |         1          |
 | Recover deleted shopping lists |      &#10006;          |         1          |
-| Clone shopping list |      &#10006;          |
+| Clone shopping list |      &#10006;          |         1          |
 | Export shopping list to Social media contacts |      &#10006;          |         1          |
 | Make shopping list item checks more responsive |    &#10004;           |         1          |
