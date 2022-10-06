@@ -19,6 +19,7 @@ class ShoppingListView extends StatelessWidget {
         builder: (context, viewModel, child) =>
             Scaffold(
                 appBar: AppBar(
+                    centerTitle: true,
                     title: const Center(
                       child: Text(
                           "Alle Shoppinglister"
