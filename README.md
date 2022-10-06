@@ -20,3 +20,5 @@ Priority 1-5 where 5 is the highest priority possible
 | Clone shopping list |      &#10006;          |         2          |
 | Export shopping list to Social media contacts |      &#10006;          |         2          |
 | Make shopping list item checks more responsive |    &#10004;           |         2          |
+| Implement life cycle watcher - Web / PWA |    &#10004;           |         4          |
+| Implement life cycle watcher - Android, iOS |    &#10004;           |         4          |
