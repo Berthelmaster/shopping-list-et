@@ -4,6 +4,7 @@ using MediatR;
 using shopping_list_et.application;
 using shopping_list_et.infrastructure.SignalR;
 using shopping_list_et.api;
+using shopping_list_et.infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,15 +21,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddSignalR();
 
 builder.Services.AddScoped<ShoppingListHub>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServiceCollection();
 
 var shoppingListConfiguration = new ShoppingListConfiguration();
-
 builder.Configuration.Bind(shoppingListConfiguration);
 builder.Services.AddSingleton(shoppingListConfiguration);
+
+var textFromImageConfiguration = new TextFromImageConfiguration();
+builder.Configuration.Bind(textFromImageConfiguration);
+builder.Services.AddSingleton(textFromImageConfiguration);
+
+builder.Services.AddScoped<TextFromImageService>();
 
 var devCorsPolicy = "devCorsPolicy";
 builder.Services.AddCors(options =>

@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>shopping_list_et.api</RootNamespace>
+    <UserSecretsId>77f6f252-6675-4ab0-a345-56b62575600a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
