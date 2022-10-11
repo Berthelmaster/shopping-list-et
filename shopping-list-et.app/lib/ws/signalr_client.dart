@@ -68,6 +68,12 @@ class SignalrClient{
   }
   
   void setupEvents(){
+    hubConnection.on("OnConnected", (arguments) {
+      Fluttertoast.showToast(
+          msg: "Connected",
+      );
+    });
+
     hubConnection.on("OnShoppingListChangedEvent", (argument) {
       onShoppingListUpdatedEvent.broadcast();
     });
