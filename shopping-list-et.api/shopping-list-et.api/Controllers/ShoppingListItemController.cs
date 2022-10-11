@@ -69,6 +69,8 @@ namespace shopping_list_et.api.Controllers
 
             await mediator.Publish(@event, cancellationToken);
 
+
+
             return Ok(response);
         }
 

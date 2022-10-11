@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -104,7 +105,7 @@ class ShoppingListItemView extends StatelessWidget {
                                     icon: const Icon(
                                         Icons.camera_alt
                                     ),
-                                    onPressed: () => print("ok"),
+                                    onPressed: () async => await viewModel.toggleCamera(),
                                   ),
                                   prefixIcon: IconButton(
                                     icon: const Icon(
@@ -121,6 +122,9 @@ class ShoppingListItemView extends StatelessWidget {
                                   )
                               )
                           ),
+                          viewModel.cameraOn == true ?
+                          Expanded(child: CameraPreview(viewModel.controller))
+                          :
                           Expanded(
                             child: ListView.separated(
                                 itemCount: viewModel.shoppingList!.items!

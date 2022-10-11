@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shopping_list_et_app/repositories/shopping_list_item_repository.dart';
 
@@ -14,6 +15,9 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   ShoppingList? shoppingList;
   bool modelReady() => shoppingList != null;
   final addItemFormFieldController = TextEditingController();
+  late CameraController controller;
+  late List<CameraDescription> _cameras;
+  var cameraOn = false;
 
   Future<void> initializeOrCreateShoppingList(int? shoppingListId) async {
     signalrClient.onShoppingListItemUpdatedEvent.subscribe(onShoppingListItemUpdated);
@@ -29,6 +33,21 @@ class ShoppingListItemViewModel extends ChangeNotifier{
 
     notifyListeners();
 
+  }
+
+  Future<void> toggleCamera() async{
+    if(!cameraOn){
+      _cameras = await availableCameras();
+      controller = CameraController(_cameras[0], ResolutionPreset.max);
+      await controller.initialize();
+
+      cameraOn = true;
+    }else{
+      await controller.dispose();
+      cameraOn = false;
+    }
+
+    notifyListeners();
   }
 
   Future<void> setCheckedValue(Item item) async{

@@ -46,6 +46,11 @@ dependencies:
   fluttertoast: ^8.0.9
   flutter_staggered_animations: ^1.1.1
   universal_html: ^2.0.8
+  camera: ^0.10.0+3
+
+dependency_overrides:
+  camera_android: 0.9.7+1
+  camera_avfoundation: 0.9.7+1
 
 dev_dependencies:
   flutter_test:
