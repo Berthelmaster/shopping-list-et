@@ -35,11 +35,9 @@ class SignalrClient{
 
   void checkConnection() {
 
-    if(hubConnection.state != HubConnectionState.Connected) {
-      Fluttertoast.showToast(
-          msg: "Connection: ${hubConnection.state}"
-      );
-    }
+    Fluttertoast.showToast(
+        msg: "Connection: ${hubConnection.state}"
+    );
 
     switch(hubConnection.state) {
       case HubConnectionState.Disconnected:
