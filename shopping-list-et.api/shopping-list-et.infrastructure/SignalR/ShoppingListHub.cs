@@ -24,7 +24,9 @@ namespace shopping_list_et.infrastructure.SignalR
         {
             await base.OnConnectedAsync();
 
-            logger.LogInformation("Device Connected");
+            logger.LogInformation("Device Conencted {deviceid}", Context.ConnectionId);
+
+            await Clients.Caller.SendAsync("OnConnected");
         }
 
         public override Task OnDisconnectedAsync(Exception? exception)
