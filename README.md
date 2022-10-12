@@ -22,3 +22,7 @@ Priority 1-5 where 5 is the highest priority possible
 | Make shopping list item checks more responsive |    &#10004;           |         2          |
 | Implement life cycle watcher - Web / PWA |    &#10004;           |         4          |
 | Implement life cycle watcher - Android, iOS |    &#10004;           |         4          |
+| Implement Camera |    &#10004;           |         4          |
+| Implement Text recognition ML model in API layer |    &#10004;           |         4          |
+| Implement recipe scanning to automatically add items to shopping list |    &#10006;           |         4          |
+
