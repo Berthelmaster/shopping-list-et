@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shopping_list_et_app/locator.dart';
 import 'package:shopping_list_et_app/repositories/shopping_list_repository.dart';
 import 'package:shopping_list_et_app/sp.dart';
+import 'package:shopping_list_et_app/views/image_preview_view.dart';
 import 'package:shopping_list_et_app/views/shopping_list_access_view.dart';
 import 'package:shopping_list_et_app/views/shopping_list_item_view.dart';
 import 'package:shopping_list_et_app/views/shopping_list_view.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         '/access': (context) => const ShoppingListAccessView(),
         '/shoppingLists': (context) => const ShoppingListView(),
         '/shoppingListItem': (context) => const ShoppingListItemView(),
+        '/imagePreview': (context) => const ImagePreviewView()
       },
     );
   }

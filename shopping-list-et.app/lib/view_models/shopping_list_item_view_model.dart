@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopping_list_et_app/repositories/shopping_list_item_repository.dart';
 
 import '../locator.dart';
@@ -64,7 +65,19 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<void> takePicture() async {
+  Future<XFile?> takePicture() async {
+    if(controller.value.isTakingPicture) {
+      return null;
+    }
+
+    try{
+      final XFile image = await controller.takePicture();
+      return image;
+    } on CameraException catch(e){
+      Fluttertoast.showToast(msg: e.description.toString());
+      return null;
+    }
+
 
   }
 

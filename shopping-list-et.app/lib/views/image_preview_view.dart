@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/widgets.dart';
 
 class ImagePreviewView extends StatelessWidget{
+  const ImagePreviewView({super.key});
 
   @override
   Widget build(BuildContext context) {
