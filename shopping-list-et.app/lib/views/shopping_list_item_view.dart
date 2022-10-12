@@ -27,7 +27,46 @@ class ShoppingListItemView extends StatelessWidget {
         onModelReady: (viewModel) async =>
         await viewModel.initializeOrCreateShoppingList(shoppingListId),
         builder: (context, viewModel, child) =>
-            Scaffold(
+        viewModel.cameraOn == true ?
+        CameraPreview(viewModel.controller,
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.all(25),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment
+                        .spaceBetween,
+                  children: [
+                    FloatingActionButton(
+                      onPressed: () async => await viewModel.nextCamera(),
+                      backgroundColor: Colors.transparent,
+                      heroTag: 'camera-switch',
+                      child: const Icon(
+                        Icons.cameraswitch
+                      ),
+                    ),
+                    FloatingActionButton(
+                      onPressed: () => print('OK2'),
+                      backgroundColor: Colors.transparent,
+                      heroTag: 'camera-takePicture',
+                      child: const Icon(
+                          Icons.camera_alt
+                      ),
+                    ),
+                    FloatingActionButton(
+                      onPressed: () async => await viewModel.toggleCamera(),
+                      backgroundColor: Colors.transparent,
+                      heroTag: 'camera-exit',
+                      child: const Icon(
+                          Icons.close
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        )
+            :Scaffold(
                 appBar: AppBar(
                     centerTitle: true,
                     title: Text(
@@ -122,9 +161,6 @@ class ShoppingListItemView extends StatelessWidget {
                                   )
                               )
                           ),
-                          viewModel.cameraOn == true ?
-                          Expanded(child: CameraPreview(viewModel.controller))
-                          :
                           Expanded(
                             child: ListView.separated(
                                 itemCount: viewModel.shoppingList!.items!

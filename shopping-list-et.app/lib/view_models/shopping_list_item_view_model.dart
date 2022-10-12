@@ -15,9 +15,13 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   ShoppingList? shoppingList;
   bool modelReady() => shoppingList != null;
   final addItemFormFieldController = TextEditingController();
+
+  // Variables for camera access, control, photos
   late CameraController controller;
   late List<CameraDescription> _cameras;
   var cameraOn = false;
+  var currentCameraPosition = 0;
+  late int availableCameraPositions;
 
   Future<void> initializeOrCreateShoppingList(int? shoppingListId) async {
     signalrClient.onShoppingListItemUpdatedEvent.subscribe(onShoppingListItemUpdated);
@@ -38,7 +42,8 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   Future<void> toggleCamera() async{
     if(!cameraOn){
       _cameras = await availableCameras();
-      controller = CameraController(_cameras[0], ResolutionPreset.max);
+      availableCameraPositions = _cameras.length;
+      controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max, enableAudio: false);
       await controller.initialize();
 
       cameraOn = true;
@@ -48,6 +53,19 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     }
 
     notifyListeners();
+  }
+
+  Future<void> nextCamera() async {
+    currentCameraPosition = currentCameraPosition >= availableCameraPositions-1
+        ? 0
+        : currentCameraPosition+=1;
+    controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max, enableAudio: false);
+    await controller.initialize();
+    notifyListeners();
+  }
+
+  Future<void> takePicture() async {
+
   }
 
   Future<void> setCheckedValue(Item item) async{
@@ -88,7 +106,7 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   @override
   void dispose() async{
     signalrClient.onShoppingListItemUpdatedEvent.unsubscribe(onShoppingListItemUpdated);
-
+    controller.dispose();
     super.dispose();
   }
 
