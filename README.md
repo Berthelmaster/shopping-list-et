@@ -15,7 +15,7 @@ Priority 1-5 where 5 is the highest priority possible
 | Publish to Web - PWA              |    &#10004;           |         1          |
 | Setup CICD Flows              |      &#10004;         |         1          |
 | Implemented sign in              |      &#10004;         |         1          |
-| Shopping lists view should update on indiviual shopping list items updates for all shoppinglists |      &#10006;          |         2          |
+| Shopping lists view should update on indiviual shopping list items updates for all shoppinglists |      &#10004;          |         2          |
 | Recover deleted shopping lists |      &#10006;          |         1          |
 | Clone shopping list |      &#10006;          |         2          |
 | Export shopping list to Social media contacts |      &#10006;          |         2          |
