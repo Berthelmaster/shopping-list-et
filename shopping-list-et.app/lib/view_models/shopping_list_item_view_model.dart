@@ -30,8 +30,6 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     signalrClient.onShoppingListItemUpdatedEvent.subscribe(onShoppingListItemUpdated);
     signalrClient.onShoppingListUpdatedEvent.subscribe(onShoppingListUpdated);
 
-    _cameras = await availableCameras();
-
     if(shoppingListId != null) {
       shoppingList = await shoppingListRepository.getById(shoppingListId);
 
@@ -47,8 +45,9 @@ class ShoppingListItemViewModel extends ChangeNotifier{
 
   Future<void> toggleCamera() async{
     if(!cameraOn){
-      availableCameraPositions = _cameras.length;
-      controller = CameraController(_cameras[kIsWeb ? 1 : 0], ResolutionPreset.max);
+      _cameras = await availableCameras();
+      availableCameraPositions = _cameras.length - 1;
+      controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max);
       await controller.initialize();
       cameraOn = true;
     }else{
@@ -63,10 +62,10 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     cameraButtonsClickable = false;
     notifyListeners();
 
-    currentCameraPosition = currentCameraPosition >= availableCameraPositions-1
+    currentCameraPosition = currentCameraPosition >= availableCameraPositions
         ? 0
         : currentCameraPosition+=1;
-    controller = CameraController(_cameras[kIsWeb ? 1 : currentCameraPosition], ResolutionPreset.max, enableAudio: false);
+    controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max);
     await controller.initialize();
     cameraButtonsClickable = true;
     notifyListeners();
@@ -140,6 +139,7 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     signalrClient.onShoppingListItemUpdatedEvent.unsubscribe(onShoppingListItemUpdated);
     signalrClient.onShoppingListUpdatedEvent.unsubscribe(onShoppingListUpdated);
     await controller.dispose();
+    print('Disposed called');
     super.dispose();
   }
 
