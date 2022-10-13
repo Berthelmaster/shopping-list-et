@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopping_list_et_app/repositories/shopping_list_item_repository.dart';
@@ -47,7 +48,7 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   Future<void> toggleCamera() async{
     if(!cameraOn){
       availableCameraPositions = _cameras.length;
-      controller = CameraController(_cameras[0], ResolutionPreset.max);
+      controller = CameraController(_cameras[kIsWeb ? 1 : 0], ResolutionPreset.max);
       await controller.initialize();
       cameraOn = true;
     }else{
@@ -65,7 +66,7 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     currentCameraPosition = currentCameraPosition >= availableCameraPositions-1
         ? 0
         : currentCameraPosition+=1;
-    controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max, enableAudio: false);
+    controller = CameraController(_cameras[kIsWeb ? 1 : currentCameraPosition], ResolutionPreset.max, enableAudio: false);
     await controller.initialize();
     cameraButtonsClickable = true;
     notifyListeners();

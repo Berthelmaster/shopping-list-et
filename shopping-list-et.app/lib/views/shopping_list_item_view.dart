@@ -48,7 +48,9 @@ class ShoppingListItemView extends StatelessWidget {
                       ),
                     ),
                     FloatingActionButton(
-                      onPressed: () => print('OK2'),
+                      onPressed: () async => viewModel.cameraButtonsClickable
+                        ? print('OK2')
+                        : null,
                       backgroundColor: Colors.transparent,
                       heroTag: 'camera-takePicture',
                       child: const Icon(
@@ -56,7 +58,9 @@ class ShoppingListItemView extends StatelessWidget {
                       ),
                     ),
                     FloatingActionButton(
-                      onPressed: () async => await viewModel.toggleCamera(),
+                      onPressed: () async => viewModel.cameraButtonsClickable
+                          ? await viewModel.toggleCamera()
+                          : null,
                       backgroundColor: Colors.transparent,
                       heroTag: 'camera-exit',
                       child: const Icon(
