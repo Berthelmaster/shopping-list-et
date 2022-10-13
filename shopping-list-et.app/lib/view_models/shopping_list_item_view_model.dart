@@ -44,7 +44,7 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     if(!cameraOn){
       _cameras = await availableCameras();
       availableCameraPositions = _cameras.length;
-      controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max, enableAudio: false);
+      controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max);
       await controller.initialize();
 
       cameraOn = true;
@@ -119,7 +119,7 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   @override
   void dispose() async{
     signalrClient.onShoppingListItemUpdatedEvent.unsubscribe(onShoppingListItemUpdated);
-    controller.dispose();
+    await controller.dispose();
     super.dispose();
   }
 
