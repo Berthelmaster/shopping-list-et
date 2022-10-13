@@ -121,5 +121,26 @@ namespace shopping_list_et.api.Controllers
 
             return BadRequest();
         }
+
+        [HttpPut("modify/name")]
+        public async Task<IActionResult> ChangeName([FromQuery] int shoppingListId, [FromQuery] string newName, CancellationToken cancellationToken)
+        {
+            var command = new ShoppingListModifyNameCommand()
+            {
+                ShoppingListId = shoppingListId,
+                ShoppingListName = newName
+            };
+
+            var response = await mediator.Send(command, cancellationToken);
+
+            var @eventLists = new ShoppingListUpdatedEvent()
+            {
+
+            };
+
+            await mediator.Publish(@eventLists, cancellationToken);
+
+            return Ok();
+        }
     }
 }

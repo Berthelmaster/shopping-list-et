@@ -25,7 +25,7 @@ namespace shopping_list_et.application.Events.ShoppingListUpdated
         {
             logger.LogInformation("Sending event to update Shopping List");
 
-            await hubContext.Clients.All.SendAsync("OnShoppingListChangedEvent", cancellationToken);
+            await hubContext.Clients.All.SendAsync("OnShoppingListChangedEvent", notification.ShoppingListId, cancellationToken);
         }
     }
 }

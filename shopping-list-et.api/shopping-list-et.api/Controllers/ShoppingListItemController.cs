@@ -40,7 +40,7 @@ namespace shopping_list_et.api.Controllers
 
             await mediator.Publish(@event, cancellationToken);
 
-            var @eventLists = new ShoppingListUpdatedEvent()
+            var @eventLists = new ShoppingListUpdatedEvent(response.ShoppingListId)
             {
 
             };
@@ -92,7 +92,7 @@ namespace shopping_list_et.api.Controllers
 
             await mediator.Publish(@event, cancellationToken);
 
-            var @eventLists = new ShoppingListUpdatedEvent()
+            var @eventLists = new ShoppingListUpdatedEvent(response.ShoppingListId)
             {
 
             };

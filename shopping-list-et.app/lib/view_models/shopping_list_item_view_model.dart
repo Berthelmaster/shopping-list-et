@@ -100,6 +100,18 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
+  void onShoppingListUpdated(ShoppingListEventArgs? args) async{
+    if(shoppingList!.id != args!.shoppingListId) {
+      return;
+    }
+
+    shoppingList = await shoppingListRepository.getById(shoppingList!.id);
+
+    filterShoppingListItemsByChecked(shoppingList);
+
+    notifyListeners();
+  }
+
   Future<void> removeItem(int id) async{
     await shoppingListItemRepository.removeItem(id);
   }

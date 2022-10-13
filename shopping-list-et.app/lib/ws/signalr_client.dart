@@ -9,7 +9,7 @@ import 'dart:convert';
 class SignalrClient{
   late HubConnection hubConnection;
   bool connected = false;
-  Event onShoppingListUpdatedEvent = Event();
+  Event<ShoppingListEventArgs> onShoppingListUpdatedEvent = Event<ShoppingListEventArgs>();
   Event<ShoppingListItemEventArgs> onShoppingListItemUpdatedEvent = Event<ShoppingListItemEventArgs>();
 
   SignalrClient(){
@@ -75,7 +75,8 @@ class SignalrClient{
     });
 
     hubConnection.on("OnShoppingListChangedEvent", (argument) {
-      onShoppingListUpdatedEvent.broadcast();
+      var shoppingListId = int.parse(argument![0].toString());
+      onShoppingListUpdatedEvent.broadcast(ShoppingListEventArgs(shoppingListId));
     });
 
     hubConnection.on("OnItemChangedEvent", (argument) {
@@ -113,4 +114,10 @@ class ShoppingListItemEventArgs extends EventArgs{
   int shoppingListId;
 
   ShoppingListItemEventArgs(this.shoppingListId);
+}
+
+class ShoppingListEventArgs extends EventArgs{
+  int shoppingListId;
+
+  ShoppingListEventArgs(this.shoppingListId);
 }

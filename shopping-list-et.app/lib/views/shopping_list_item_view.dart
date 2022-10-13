@@ -69,10 +69,13 @@ class ShoppingListItemView extends StatelessWidget {
             :Scaffold(
                 appBar: AppBar(
                     centerTitle: true,
-                    title: Text(
-                        viewModel.modelReady() == true ?
-                        "| ${viewModel.shoppingList!.name} |"
-                            : "Loading..."
+                    title: GestureDetector(
+                      onTap: () => print('HEllo!'),
+                      child: Text(
+                          viewModel.modelReady() == true ?
+                          "| ${viewModel.shoppingList!.name} |"
+                              : "Loading..."
+                      ),
                     ),
                     bottom: viewModel.modelReady() == false
                         ? PreferredSize(
