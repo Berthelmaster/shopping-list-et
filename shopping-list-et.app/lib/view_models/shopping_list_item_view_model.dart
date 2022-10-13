@@ -22,6 +22,7 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   late List<CameraDescription> _cameras;
   var cameraOn = false;
   var currentCameraPosition = 0;
+  var cameraButtonsClickable = true;
   late int availableCameraPositions;
 
   Future<void> initializeOrCreateShoppingList(int? shoppingListId) async {
@@ -48,7 +49,6 @@ class ShoppingListItemViewModel extends ChangeNotifier{
       availableCameraPositions = _cameras.length;
       controller = CameraController(_cameras[0], ResolutionPreset.max);
       await controller.initialize();
-
       cameraOn = true;
     }else{
       await controller.dispose();
@@ -59,11 +59,15 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   }
 
   Future<void> nextCamera() async {
+    cameraButtonsClickable = false;
+    notifyListeners();
+
     currentCameraPosition = currentCameraPosition >= availableCameraPositions-1
         ? 0
         : currentCameraPosition+=1;
     controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max, enableAudio: false);
     await controller.initialize();
+    cameraButtonsClickable = true;
     notifyListeners();
   }
 

@@ -38,7 +38,9 @@ class ShoppingListItemView extends StatelessWidget {
                         .spaceBetween,
                   children: [
                     FloatingActionButton(
-                      onPressed: () async => await viewModel.nextCamera(),
+                      onPressed: () async => viewModel.cameraButtonsClickable
+                          ? await viewModel.nextCamera()
+                          : null,
                       backgroundColor: Colors.transparent,
                       heroTag: 'camera-switch',
                       child: const Icon(

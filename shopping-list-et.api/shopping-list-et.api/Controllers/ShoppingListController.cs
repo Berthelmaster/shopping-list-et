@@ -6,6 +6,7 @@ using shopping_list_et.application.ShoppingListDelete;
 using shopping_list_et.application.ShoppingListGet;
 using shopping_list_et.application.ShoppingListGetAll;
 using shopping_list_et.application.ShoppingListModifyName;
+using shopping_list_et.domain.Entities;
 
 namespace shopping_list_et.api.Controllers
 {
@@ -65,7 +66,7 @@ namespace shopping_list_et.api.Controllers
 
             var response = await mediator.Send(command, cancellationToken);
 
-            var @event = new ShoppingListUpdatedEvent()
+            var @event = new ShoppingListUpdatedEvent(response.Id)
             {
 
             };
@@ -87,7 +88,7 @@ namespace shopping_list_et.api.Controllers
 
             var response = await mediator.Send(command, cancellationToken);
            
-            var @event = new ShoppingListUpdatedEvent()
+            var @event = new ShoppingListUpdatedEvent(shoppingListId)
             {
 
             };
@@ -109,7 +110,7 @@ namespace shopping_list_et.api.Controllers
 
             if (response)
             {
-                var @event = new ShoppingListUpdatedEvent()
+                var @event = new ShoppingListUpdatedEvent(id)
                 {
 
                 };
@@ -133,7 +134,7 @@ namespace shopping_list_et.api.Controllers
 
             var response = await mediator.Send(command, cancellationToken);
 
-            var @eventLists = new ShoppingListUpdatedEvent()
+            var @eventLists = new ShoppingListUpdatedEvent(shoppingListId)
             {
 
             };
