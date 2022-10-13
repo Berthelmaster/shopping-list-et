@@ -18,6 +18,8 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   bool modelReady() => shoppingList != null;
   final addItemFormFieldController = TextEditingController();
 
+  final titleFormController = TextEditingController();
+
   // Variables for camera access, control, photos
   late CameraController controller;
   late List<CameraDescription> _cameras;
