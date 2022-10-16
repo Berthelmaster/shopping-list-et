@@ -48,4 +48,12 @@ class ShoppingListRepository{
     return ShoppingList.fromJson(json.decode(response.body));
   }
 
+  Future<void> modifyNameById(int shoppingListId, String newName) async{
+    var uri = Uri.parse("$httpBaseAddress/api/v1/shoppinglist?shoppingListId=$shoppingListId&newName=$newName");
+
+    var response = await http.put(uri, headers: <String,String>{
+      'Content-Type': 'application/json; charset=UTF-8'
+    });
+  }
+
 }

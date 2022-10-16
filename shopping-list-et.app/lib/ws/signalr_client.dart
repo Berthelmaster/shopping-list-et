@@ -20,6 +20,7 @@ class SignalrClient{
 
     hubConnection = HubConnectionBuilder()
         .withUrl("$httpBaseAddress/signalr/hub")
+        .withAutomaticReconnect()
         .build();
 
     if (kDebugMode) {

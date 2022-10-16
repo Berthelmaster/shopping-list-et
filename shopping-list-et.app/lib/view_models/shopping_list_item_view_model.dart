@@ -21,8 +21,8 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   final titleFormController = TextEditingController();
 
   // Variables for camera access, control, photos
-  late CameraController controller;
-  late List<CameraDescription> _cameras;
+  CameraController? cameraController;
+  List<CameraDescription>? _cameras;
   var cameraOn = false;
   var currentCameraPosition = 0;
   var cameraButtonsClickable = true;
@@ -48,12 +48,12 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   Future<void> toggleCamera() async{
     if(!cameraOn){
       _cameras = await availableCameras();
-      availableCameraPositions = _cameras.length - 1;
-      controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max);
-      await controller.initialize();
+      availableCameraPositions = _cameras!.length - 1;
+      cameraController = CameraController(_cameras![currentCameraPosition], ResolutionPreset.max);
+      await cameraController!.initialize();
       cameraOn = true;
     }else{
-      await controller.dispose();
+      await cameraController!.dispose();
       cameraOn = false;
     }
 
@@ -67,19 +67,19 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     currentCameraPosition = currentCameraPosition >= availableCameraPositions
         ? 0
         : currentCameraPosition+=1;
-    controller = CameraController(_cameras[currentCameraPosition], ResolutionPreset.max);
-    await controller.initialize();
+    cameraController = CameraController(_cameras![currentCameraPosition], ResolutionPreset.max);
+    await cameraController!.initialize();
     cameraButtonsClickable = true;
     notifyListeners();
   }
 
   Future<XFile?> takePicture() async {
-    if(controller.value.isTakingPicture) {
+    if(cameraController!.value.isTakingPicture) {
       return null;
     }
 
     try{
-      final XFile image = await controller.takePicture();
+      final XFile image = await cameraController!.takePicture();
       return image;
     } on CameraException catch(e){
       Fluttertoast.showToast(msg: e.description.toString());
@@ -136,12 +136,21 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     });
   }
 
+  Future<void> modifyName(int shoppingListId) async{
+    var newName = titleFormController.text;
+
+    await shoppingListRepository.modifyNameById(shoppingListId, newName);
+  }
+
   @override
   void dispose() async{
     signalrClient.onShoppingListItemUpdatedEvent.unsubscribe(onShoppingListItemUpdated);
     signalrClient.onShoppingListUpdatedEvent.unsubscribe(onShoppingListUpdated);
-    await controller.dispose();
-    print('Disposed called');
+
+    if(cameraController != null && cameraController!.value.isInitialized) {
+      await cameraController!.dispose();
+    }
+
     super.dispose();
   }
 

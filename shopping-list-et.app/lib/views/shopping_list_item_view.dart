@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:shopping_list_et_app/view_models/shopping_list_item_view_model.dart';
+import 'package:shopping_list_et_app/views/image_preview_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -24,11 +25,11 @@ class ShoppingListItemView extends StatelessWidget {
             await viewModel.initializeOrCreateShoppingList(shoppingListId),
         builder: (context, viewModel, child) => viewModel.cameraOn == true
             ? CameraPreview(
-                viewModel.controller,
+                viewModel.cameraController!,
                 child: Container(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: EdgeInsets.all(25),
+                    padding: const EdgeInsets.all(25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -42,10 +43,22 @@ class ShoppingListItemView extends StatelessWidget {
                           child: const Icon(Icons.cameraswitch),
                         ),
                         FloatingActionButton(
-                          onPressed: () async =>
-                              viewModel.cameraButtonsClickable
-                                  ? print('OK2')
-                                  : null,
+                          onPressed: () async {
+                            if(!viewModel.cameraButtonsClickable) {
+                              return;
+                            }
+                            var image = await viewModel.takePicture();
+
+                            Navigator.pushNamed(
+                                context,
+                                '/imagePreview',
+                                arguments: ImagePreviewArguments(
+                                    image!,
+                                  viewModel.shoppingList!.id
+                                )
+                            );
+                          },
+
                           backgroundColor: Colors.transparent,
                           heroTag: 'camera-takePicture',
                           child: const Icon(Icons.camera_alt),
@@ -73,7 +86,13 @@ class ShoppingListItemView extends StatelessWidget {
                           builder: (BuildContext context) {
                             viewModel.titleFormController.text = viewModel.shoppingList!.name.toString();
                             return AlertDialog(
-                              title: Text('Nyt navn'),
+                              title: const Text(
+                                'Nyt Navn'
+                              ),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                side: BorderSide(width: 3.0, color: Colors.white),
+                              ),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -87,15 +106,29 @@ class ShoppingListItemView extends StatelessWidget {
                                         MainAxisAlignment.center,
                                     children: [
                                       FloatingActionButton(
-                                        onPressed: () async => print('123'),
+                                        onPressed: () async {
+                                          await viewModel.modifyName(viewModel.shoppingList!.id);
+                                          Navigator.of(context).pop();
+                                        },
                                         heroTag: 'popup-1',
-                                        child: const Icon(Icons.check),
+                                        elevation: 0,
+                                        backgroundColor: Colors.transparent,
+                                        child: const Icon(
+                                            Icons.check,
+                                            color: Colors.green,
+                                        ),
+
                                       ),
                                       Spacer(),
                                       FloatingActionButton(
                                         onPressed: () => Navigator.of(context).pop(),
                                         heroTag: 'popup-2',
-                                        child: const Icon(Icons.cancel),
+                                        backgroundColor: Colors.transparent,
+                                        elevation: 0,
+                                        child: const Icon(
+                                            Icons.cancel_outlined,
+                                            color: Colors.red,
+                                        ),
                                       ),
                                     ],
                                   )
