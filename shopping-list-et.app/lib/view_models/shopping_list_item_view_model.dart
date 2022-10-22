@@ -48,8 +48,11 @@ class ShoppingListItemViewModel extends ChangeNotifier{
   Future<void> toggleCamera() async{
     if(!cameraOn){
       _cameras = await availableCameras();
-      availableCameraPositions = _cameras!.length - 1;
-      cameraController = CameraController(_cameras![currentCameraPosition], ResolutionPreset.max);
+
+      // Only use back Camera
+      var backCamera = _cameras!.firstWhere((camera) => camera.lensDirection == CameraLensDirection.back);
+
+      cameraController = CameraController(backCamera, ResolutionPreset.max);
       await cameraController!.initialize();
       cameraOn = true;
     }else{
@@ -60,6 +63,7 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
+  // Dont use this, no need
   Future<void> nextCamera() async {
     cameraButtonsClickable = false;
     notifyListeners();
