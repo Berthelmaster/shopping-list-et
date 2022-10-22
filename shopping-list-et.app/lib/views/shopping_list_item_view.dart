@@ -81,6 +81,8 @@ class ShoppingListItemView extends StatelessWidget {
             : Scaffold(
                 appBar: AppBar(
                     centerTitle: true,
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
                     title: GestureDetector(
                       onTap: () => showDialog(
                           context: context,

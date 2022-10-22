@@ -20,6 +20,8 @@ class ShoppingListView extends StatelessWidget {
             Scaffold(
                 appBar: AppBar(
                     centerTitle: true,
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
                     title: const Center(
                       child: Text(
                           "Alle Shoppinglister"
