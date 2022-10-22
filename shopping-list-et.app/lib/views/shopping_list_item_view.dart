@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:shopping_list_et_app/view_models/shopping_list_item_view_model.dart';
 import 'package:shopping_list_et_app/views/image_preview_view.dart';
@@ -36,7 +37,7 @@ class ShoppingListItemView extends StatelessWidget {
                         FloatingActionButton(
                           onPressed: () async =>
                               viewModel.cameraButtonsClickable
-                                  ? await viewModel.nextCamera()
+                                  ? Fluttertoast.showToast(msg: "Hvordan kan man tage en selfie af en opskrift?")
                                   : null,
                           backgroundColor: Colors.transparent,
                           heroTag: 'camera-switch',
