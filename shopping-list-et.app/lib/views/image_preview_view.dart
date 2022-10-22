@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shopping_list_et_app/view_models/image_preview_view_model.dart';
@@ -14,24 +15,41 @@ class ImagePreviewView extends StatelessWidget{
     final arguments = (ModalRoute.of(context)!.settings.arguments
     as ImagePreviewArguments);
 
+    print(arguments.image.name);
+    print(arguments.image.path);
+
     // TODO: implement build
     return ViewModelBuilder<ImagePreviewViewModel>.reactive(
     viewModelBuilder: () => ImagePreviewViewModel(),
+    onModelReady: (viewModel) async => await viewModel.init(arguments.image),
     builder: (context, viewModel, child) =>
         Scaffold(
           body: Stack(
             children: [
-              Image.file(
+              viewModel.image != null ?
+              kIsWeb ? Image.network(
+                arguments.image.path,
                 fit: BoxFit.cover,
                 height: double.infinity,
                 width: double.infinity,
                 alignment: Alignment.center,
-                File(
-                  arguments.image.path,
+              )
+              : Center(
+                child: Image.file(
+                  fit: BoxFit.fill,
+                  height: double.infinity,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  File(
+                    arguments.image.path,
+                  ),
                 ),
-              ),
+              )
+              : const CircularProgressIndicator(),
               viewModel.loading
-                  ? const CircularProgressIndicator()
+                  ? const Center(
+                  child: CircularProgressIndicator()
+              )
               : Container(
                 alignment: Alignment.bottomCenter,
                 padding: const EdgeInsets.all(15.0),
@@ -63,7 +81,8 @@ class ImagePreviewView extends StatelessWidget{
                       width: 80,
                       child: FittedBox(
                         child: FloatingActionButton(
-                          onPressed: () async {
+                          onPressed: () {
+                            Navigator.of(context).pop();
                           },
                           heroTag: 'preview-2',
                           elevation: 0,

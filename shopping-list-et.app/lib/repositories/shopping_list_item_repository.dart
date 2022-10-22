@@ -39,11 +39,13 @@ class ShoppingListItemRepository{
   Future<void> getItemsByImage(int shoppingListId, XFile? image) async{
     var uri = Uri.parse("$httpBaseAddress/api/v1/ImageTextRecognition?shoppingListId=$shoppingListId");
 
+    var fileBytes = await image!.readAsBytes();
+
     var request = http.MultipartRequest('POST', uri)
       ..files.add(http.MultipartFile.fromBytes(
         'file',
-        File(image!.path).readAsBytesSync(),
-        filename: image.name,
+        fileBytes,
+        filename: "image",
           )
       );
 
