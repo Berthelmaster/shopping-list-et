@@ -83,6 +83,9 @@ class ShoppingListItemView extends StatelessWidget {
                     centerTitle: true,
                     elevation: 0,
                     backgroundColor: Colors.transparent,
+                    systemOverlayStyle: const SystemUiOverlayStyle(
+                        statusBarColor: Colors.transparent
+                    ),
                     title: GestureDetector(
                       onTap: () => showDialog(
                           context: context,
@@ -139,9 +142,13 @@ class ShoppingListItemView extends StatelessWidget {
                               ),
                             );
                           }),
-                      child: Text(viewModel.modelReady() == true
-                          ? "| ${viewModel.shoppingList!.name} |"
-                          : "Loading..."),
+                      child: Text(
+                          viewModel.modelReady() == true
+                          ? viewModel.shoppingList!.name!
+                          : "Loading...",
+                        style: const TextStyle(
+                            color: Color.fromRGBO(7, 106, 113, 1)
+                        ),),
                     ),
                     bottom: viewModel.modelReady() == false
                         ? PreferredSize(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:shopping_list_et_app/view_models/shopping_list_view_model.dart';
@@ -22,14 +23,24 @@ class ShoppingListView extends StatelessWidget {
                     centerTitle: true,
                     elevation: 0,
                     backgroundColor: Colors.transparent,
+                    systemOverlayStyle: const SystemUiOverlayStyle(
+                        statusBarColor: Colors.transparent
+                    ),
                     title: const Center(
                       child: Text(
-                          "Alle Shoppinglister"
+                          "Alle Shoppinglister",
+                        style: TextStyle(
+                          color: Color.fromRGBO(7, 106, 113, 1)
+                        ),
+
                       ),
                     ),
                     actions: <Widget>[
                       IconButton(
-                        icon: const Icon(Icons.add_business_outlined),
+                        icon: const Icon(
+                            Icons.add_business_outlined,
+                          color: Color.fromRGBO(7, 106, 113, 1),
+                        ),
                         tooltip: 'Show Snackbar',
                         onPressed: () {
                           Navigator.pushNamed(context, '/shoppingListItem');
@@ -64,6 +75,7 @@ class ShoppingListView extends StatelessWidget {
                                           .shoppingLists[index].id)
                               ),
                           child: Card(
+                            color: Color.fromRGBO(200, 235, 215,1),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.0)
                             ),
@@ -126,7 +138,7 @@ class ShoppingListView extends StatelessWidget {
                                                   .id),
                                       icon: const Icon(
                                         Icons.delete_forever,
-                                        color: Colors.red,
+                                        color: Color.fromRGBO(7, 106, 113, 1),
                                       ),
                                     )
 
