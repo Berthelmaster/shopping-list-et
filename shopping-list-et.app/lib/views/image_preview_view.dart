@@ -27,8 +27,8 @@ class ImagePreviewView extends StatelessWidget{
           body: Stack(
             children: [
               viewModel.image != null ?
-              kIsWeb ? Image.network(
-                arguments.image.path,
+              kIsWeb ? Image.memory(
+                viewModel.image!,
                 fit: BoxFit.cover,
                 height: double.infinity,
                 width: double.infinity,

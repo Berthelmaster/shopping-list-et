@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shopping_list_et_app/repositories/shopping_list_item_repository.dart';
 
 import '../locator.dart';
@@ -144,6 +145,13 @@ class ShoppingListItemViewModel extends ChangeNotifier{
     var newName = titleFormController.text;
 
     await shoppingListRepository.modifyNameById(shoppingListId, newName);
+  }
+  Future<XFile?> pickImageFromGallery() async{
+    final ImagePicker _picker = ImagePicker();
+
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    return image;
   }
 
   @override

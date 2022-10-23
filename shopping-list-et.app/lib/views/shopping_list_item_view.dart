@@ -35,13 +35,27 @@ class ShoppingListItemView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         FloatingActionButton(
-                          onPressed: () async =>
-                              viewModel.cameraButtonsClickable
-                                  ? Fluttertoast.showToast(msg: "Hvordan kan man tage en selfie af en opskrift?")
-                                  : null,
+                          onPressed: () async {
+                            if(!viewModel.cameraButtonsClickable) {
+                              return;
+                            }
+                            final galleryImage = await viewModel.pickImageFromGallery();
+
+                            if(galleryImage != null)
+                              {
+                                Navigator.pushNamed(
+                                    context,
+                                    '/imagePreview',
+                                    arguments: ImagePreviewArguments(
+                                        galleryImage,
+                                        viewModel.shoppingList!.id
+                                    )
+                                );
+                              }
+                          },
                           backgroundColor: Colors.transparent,
-                          heroTag: 'camera-switch',
-                          child: const Icon(Icons.cameraswitch),
+                          heroTag: 'camera-gallery',
+                          child: const Icon(Icons.image),
                         ),
                         FloatingActionButton(
                           onPressed: () async {
