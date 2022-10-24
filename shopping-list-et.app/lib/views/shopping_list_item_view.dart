@@ -210,6 +210,7 @@ class ShoppingListItemView extends StatelessWidget {
                             TextFormField(
                                 maxLength: 25,
                                 autocorrect: true,
+                                textCapitalization: TextCapitalization.sentences,
                                 controller:
                                     viewModel.addItemFormFieldController,
                                 decoration: InputDecoration(
