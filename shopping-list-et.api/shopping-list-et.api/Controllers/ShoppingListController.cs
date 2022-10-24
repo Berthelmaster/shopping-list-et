@@ -57,7 +57,7 @@ namespace shopping_list_et.api.Controllers
             return Ok(response);
         }
 
-        [HttpGet]
+        [HttpGet("copy")]
         public async Task<IActionResult> CopyShoppingList([FromQuery] int shoppingListId, CancellationToken cancellationToken)
         {
             var command = new ShoppingListCopyCommand()
