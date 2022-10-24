@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using shopping_list_et.application.Events.ShoppingListUpdated;
+using shopping_list_et.application.ShoppingListCopy;
 using shopping_list_et.application.ShoppingListCreate;
 using shopping_list_et.application.ShoppingListDelete;
 using shopping_list_et.application.ShoppingListGet;
@@ -54,6 +55,26 @@ namespace shopping_list_et.api.Controllers
             var response = await mediator.Send(command, cancellationToken);
 
             return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CopyShoppingList([FromQuery] int shoppingListId, CancellationToken cancellationToken)
+        {
+            var command = new ShoppingListCopyCommand()
+            {
+                ShoppingListId = shoppingListId
+            };
+
+            var response = await mediator.Send(command, cancellationToken);
+
+            var @event = new ShoppingListUpdatedEvent(response.Id)
+            {
+
+            };
+
+            await mediator.Publish(@event, cancellationToken);
+
+            return Ok();
         }
 
         [HttpPost]
