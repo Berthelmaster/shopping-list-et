@@ -29,7 +29,7 @@ class ImagePreviewView extends StatelessWidget{
               viewModel.image != null ?
               kIsWeb ? Image.memory(
                 viewModel.image!,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
                 height: double.infinity,
                 width: double.infinity,
                 alignment: Alignment.center,
