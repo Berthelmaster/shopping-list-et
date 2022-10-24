@@ -47,7 +47,8 @@ namespace shopping_list_et.infrastructure.Services
             ReadOperationResult results;
             do
             {
-                results = await client.GetReadResultAsync(Guid.Parse(operationId), cancellationToken: cancellationToken);
+                results = await client.GetReadResultAsync(Guid.Parse(operationId));
+                logger.LogInformation("Operation is: {status}", results.Status);
             }
             while ((results.Status == OperationStatusCodes.Running ||
                 results.Status == OperationStatusCodes.NotStarted));
