@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace shopping_list_et.infrastructure.Services
 {
@@ -24,12 +25,24 @@ namespace shopping_list_et.infrastructure.Services
                 Endpoint = configuration.Endpoint
             };
 
+            var stopwatch1 = new Stopwatch();
+
+            stopwatch1.Start();
             var textHeaders = await client.ReadInStreamAsync(file, language: "da", cancellationToken: cancellationToken);
+
 
             string operationLocation = textHeaders.OperationLocation;
 
             const int numberOfCharsInOperationId = 36;
             string operationId = operationLocation.Substring(operationLocation.Length - numberOfCharsInOperationId);
+
+            stopwatch1.Stop();
+
+            logger.LogInformation("Api request took: {milliseconds}", stopwatch1.ElapsedMilliseconds);
+
+
+            var stopwatch2 = new Stopwatch();
+            stopwatch2.Start();
 
             ReadOperationResult results;
             do
@@ -39,6 +52,12 @@ namespace shopping_list_et.infrastructure.Services
             while ((results.Status == OperationStatusCodes.Running ||
                 results.Status == OperationStatusCodes.NotStarted));
 
+            stopwatch2.Stop();
+
+            logger.LogInformation("Read result took: {milliseconds}", stopwatch2.ElapsedMilliseconds);
+
+            var stopwatch3 = new Stopwatch();
+            stopwatch3.Start();
             var textPages = results.AnalyzeResult.ReadResults;
 
             var textLines = new List<string>();
@@ -49,6 +68,9 @@ namespace shopping_list_et.infrastructure.Services
                     textLines.Add(line.Text);
                 }
             }
+
+            stopwatch3.Stop();
+            logger.LogInformation("Analyze result took: {milliseconds}", stopwatch3.ElapsedMilliseconds);
 
             return textLines;
         }
